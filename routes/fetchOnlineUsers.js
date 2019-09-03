@@ -15,6 +15,7 @@ function fetchOnlineUsers(req, res, next) {
         ],
         where: {
             userId: {
+                // fetch all users except the current user
                 [Op.ne]: req.authData.userId
             }
         }

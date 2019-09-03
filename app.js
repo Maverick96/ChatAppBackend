@@ -10,7 +10,7 @@ const io = require('socket.io')(http);
 const models = require('./models');
 
 // constants
-const port = process.env.PORT || 5000;
+const port = process.env.PORT || 5001;
 
 // middlewares
 app.use(bodyParser.json());
@@ -26,6 +26,8 @@ const verifyUser = require('./routes/login');
 const registerUser = require('./routes/register');
 const logoutUser = require('./routes/logout')
 const fetchOnlineUsers = require('./routes/fetchOnlineUsers');
+const fetchMessages = require('./routes/fetchMessages');
+// const insert = require('./insert');
 handleSockets(io);
 
 
@@ -38,6 +40,8 @@ app.post('/login', verifyUser);
 app.post('/register', registerUser);
 app.get('/logout', verifyToken, logoutUser);
 app.get('/onlineUsers', verifyToken, fetchOnlineUsers);
+app.post('/fetchMessages', fetchMessages);
+// app.get('/insert', insert);
 
 // Error Handler
 app.use(function (err, req, res, next) {
