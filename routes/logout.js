@@ -5,14 +5,11 @@ const models = require('../models');
 const UserToken = models.UserToken;
 
 function logoutUser(req, res, next) {
-    const bearerHeader = req.headers['authorization'];
-    if (bearerHeader) {
-        const bearer = bearerHeader.split(' ');
-        const token = bearer[1];
-        const payload = jwt.verify(token, keys.secret);
+    const authData = req['authData'];
+    if (authData.userId) {
         UserToken.destroy({
             where: {
-                userId: payload.userId
+                userId: authData.userId
             }
         })
             .then(tokenData => {
@@ -25,6 +22,7 @@ function logoutUser(req, res, next) {
                 next(err);
             })
     } else {
+        console.log("UserId not present")
         next(new Error("Unauthorised access"));
     }
 }

@@ -5,6 +5,7 @@ const morgan = require('morgan');
 const bodyParser = require('body-parser');
 const http = require('http').Server(app);
 const io = require('socket.io')(http);
+
 // sequelize models
 const models = require('./models');
 
@@ -16,12 +17,15 @@ app.use(bodyParser.json());
 app.use(cors());
 app.use(morgan('combined'));
 
+// utils
+const handleSockets = require('./utils/handleConnections');
+const verifyToken = require('./utils/verifyToken');
+
 // routes handlers
 const verifyUser = require('./routes/login');
 const registerUser = require('./routes/register');
 const logoutUser = require('./routes/logout')
-const handleSockets = require('./utils/handleConnections');
-
+const fetchOnlineUsers = require('./routes/fetchOnlineUsers');
 handleSockets(io);
 
 
@@ -32,7 +36,8 @@ app.get('/', (req, res) => {
 
 app.post('/login', verifyUser);
 app.post('/register', registerUser);
-app.get('/logout', logoutUser)
+app.get('/logout', verifyToken, logoutUser);
+app.get('/onlineUsers', verifyToken, fetchOnlineUsers);
 
 // Error Handler
 app.use(function (err, req, res, next) {
