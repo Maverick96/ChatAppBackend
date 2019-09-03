@@ -3,7 +3,8 @@ const app = express();
 const cors = require('cors')
 const morgan = require('morgan');
 const bodyParser = require('body-parser');
-
+const http = require('http').Server(app);
+const io = require('socket.io')(http);
 // sequelize models
 const models = require('./models');
 
@@ -19,7 +20,15 @@ app.use(morgan('combined'));
 const verifyUser = require('./routes/login');
 const registerUser = require('./routes/register');
 const logoutUser = require('./routes/logout')
+const handleSockets = require('./utils/handleConnections');
+
+handleSockets(io);
+
+
 //routes
+app.get('/', (req, res) => {
+    res.render('index.ejs');
+})
 
 app.post('/login', verifyUser);
 app.post('/register', registerUser);
@@ -37,5 +46,5 @@ app.use(function (err, req, res, next) {
 
 // connect db
 models.sequelize.sync().then(function () {
-    app.listen(port, () => console.log("server started at port " + port));
+    http.listen(port, () => console.log("server started at port " + port));
 });
