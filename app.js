@@ -40,7 +40,7 @@ app.post('/login', verifyUser);
 app.post('/register', registerUser);
 app.get('/logout', verifyToken, logoutUser);
 app.get('/onlineUsers', verifyToken, fetchOnlineUsers);
-app.post('/fetchMessages', fetchMessages);
+app.post('/fetchMessages', verifyToken, fetchMessages);
 // app.get('/insert', insert);
 
 // Error Handler
