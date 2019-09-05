@@ -42,7 +42,8 @@ function verifyUser(req, res, next) {
                         token,
                         data: {
                             name: userDetails.name,
-                            email: userDetails.email
+                            email: userDetails.email,
+                            userId: userDetails.userId
                         },
                         success: true
                     })
