@@ -11,7 +11,7 @@ const {
 function fetchOnlineUsers(req, res, next) {
     UserToken.findAndCountAll({
         attributes: [
-            'userId', 'name'
+            [sequelize.literal('DISTINCT `userId`'), 'userId'], 'name' // get only distinct users
         ],
         where: {
             userId: {
@@ -21,7 +21,7 @@ function fetchOnlineUsers(req, res, next) {
         }
     })
         .then(onlineUsers => {
-            console.log("Online ", onlineUsers.rows);
+            // console.log("Online ", onlineUsers.rows);
             res.json({
                 result: onlineUsers.rows,
                 total: onlineUsers.count
