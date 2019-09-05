@@ -21,8 +21,8 @@ function fetchChatId(user1, user2) {
         }
     })
         .then(chatDetails => {
-            console.log("CHAT details", chatDetails);
-            // if new chat, then create chatId
+            // console.log("CHAT details", chatDetails);
+            // if chatId not present, then create chat between the two users
             if (!chatDetails) {
                 return Chat.create({
                     userId1: user1,
@@ -38,10 +38,10 @@ function queryMessages(chatId, res) {
         where: {
             chatId
         },
-        attributes: ['messageId', 'message']
+        attributes: ['message', 'senderId', 'sentiment']
     })
         .then(messageData => {
-            console.log("DATA", messageData);
+            // console.log("DATA", messageData);
             res.json({
                 result: messageData.rows,
                 chatId
@@ -65,7 +65,7 @@ function fetchMessage(req, res, next) {
         }
         fetchChatId(user1, user2)
             .then(chatData => {
-                console.log("Data ", chatData)
+                // console.log("Data ", chatData)
                 chatId = chatData.dataValues.chatId;
                 return queryMessages(chatId, res);
             })

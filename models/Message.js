@@ -26,6 +26,10 @@ module.exports = (sequelize, DataTypes) => {
             type: DataTypes.STRING,
             allowNull: false,
         },
+        sentiment: {
+            type: DataTypes.STRING,
+            allowNull: false,
+        },
     }, {});
     Message.associate = function (models) {
         // associations can be defined here
