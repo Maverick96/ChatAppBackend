@@ -23,13 +23,16 @@ module.exports = (sequelize, DataTypes) => {
             }
         },
         message: {
-            type: DataTypes.STRING,
+            type: DataTypes.STRING(200),
             allowNull: false,
         },
         sentiment: {
             type: DataTypes.STRING,
         },
-    }, {});
+    }, {
+            charset: "utf8mb4",
+            collation: "utf8mb4_bin"
+        });
     Message.associate = function (models) {
         // associations can be defined here
         const Chat = models.Chat;
