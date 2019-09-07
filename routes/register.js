@@ -7,7 +7,7 @@ const User = models.User;
 
 // constants
 const keys = require('../config/constants');
-const columns = ["email", "name", "password"];
+const columns = ["email", "name", "password", "username"];
 
 function registerUser(req, res, next) {
 
@@ -33,7 +33,11 @@ function registerUser(req, res, next) {
                 });
             })
             .catch(err => {
-                console.error(err);
+                console.error("error", err['errors']);
+                if (err['name'] === 'SequelizeUniqueConstraintError') {
+                    console.log("Inside")
+                    return next(new Error(err['errors'][0]['message']));
+                }
                 next(err);
             });
     } else {
