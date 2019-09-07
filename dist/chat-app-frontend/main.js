@@ -134,9 +134,7 @@ var AppComponent = /** @class */ (function () {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "BASE_URL", function() { return BASE_URL; });
-/* harmony import */ var _environments_environment__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../environments/environment */ "./src/environments/environment.ts");
-
-var BASE_URL = _environments_environment__WEBPACK_IMPORTED_MODULE_0__["environment"].apiUrl;
+var BASE_URL = '';
 
 
 
