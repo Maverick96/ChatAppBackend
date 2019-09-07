@@ -17,7 +17,7 @@ function handleConnection(io) {
             const receiverSocket = socketMap[data.receiverId];
             if (receiverSocket) {
                 console.log("Socket present");
-                receiverSocket.emit('peer-key', data.key);
+                receiverSocket.emit('peer-key', data);
             }
         })
 

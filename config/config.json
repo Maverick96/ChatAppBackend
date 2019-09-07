@@ -1,5 +1,5 @@
 {
-    "development": {
+    "t-development": {
         "username": "sql12304353",
         "password": "zJc57JC2Cu",
         "database": "sql12304353",
@@ -8,7 +8,7 @@
         "operatorsAliases": false,
         "logging": false
     },
-    "t-development": {
+    "development": {
         "username": "root",
         "password": "root@123",
         "database": "chat_app",

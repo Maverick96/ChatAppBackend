@@ -134,7 +134,9 @@ var AppComponent = /** @class */ (function () {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "BASE_URL", function() { return BASE_URL; });
-var BASE_URL = '';
+/* harmony import */ var _environments_environment__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../environments/environment */ "./src/environments/environment.ts");
+
+var BASE_URL = _environments_environment__WEBPACK_IMPORTED_MODULE_0__["environment"].apiUrl;
 
 
 
@@ -167,6 +169,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _ctrl_ngx_emoji_mart__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! @ctrl/ngx-emoji-mart */ "./node_modules/@ctrl/ngx-emoji-mart/fesm5/ctrl-ngx-emoji-mart.js");
 /* harmony import */ var _ctrl_ngx_emoji_mart_ngx_emoji__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! @ctrl/ngx-emoji-mart/ngx-emoji */ "./node_modules/@ctrl/ngx-emoji-mart/ngx-emoji/fesm5/ctrl-ngx-emoji-mart-ngx-emoji.js");
 /* harmony import */ var _angular_material__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! @angular/material */ "./node_modules/@angular/material/esm5/material.es5.js");
+/* harmony import */ var _video_chat_box_video_chat_box_component__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ./video-chat-box/video-chat-box.component */ "./src/app/video-chat-box/video-chat-box.component.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -191,6 +194,8 @@ var __decorate = (undefined && undefined.__decorate) || function (decorators, ta
 
 // material modules
 
+
+
 var AppModule = /** @class */ (function () {
     function AppModule() {
     }
@@ -203,6 +208,7 @@ var AppModule = /** @class */ (function () {
                 _home_home_component__WEBPACK_IMPORTED_MODULE_9__["HomeComponent"],
                 _user_list_user_list_component__WEBPACK_IMPORTED_MODULE_10__["UserListComponent"],
                 _message_box_message_box_component__WEBPACK_IMPORTED_MODULE_11__["MessageBoxComponent"],
+                _video_chat_box_video_chat_box_component__WEBPACK_IMPORTED_MODULE_17__["VideoChatBoxComponent"],
             ],
             imports: [
                 _angular_platform_browser__WEBPACK_IMPORTED_MODULE_0__["BrowserModule"],
@@ -216,13 +222,16 @@ var AppModule = /** @class */ (function () {
                 _angular_material__WEBPACK_IMPORTED_MODULE_16__["MatListModule"],
                 _angular_material__WEBPACK_IMPORTED_MODULE_16__["MatIconModule"],
                 _ctrl_ngx_emoji_mart__WEBPACK_IMPORTED_MODULE_14__["PickerModule"],
-                _ctrl_ngx_emoji_mart_ngx_emoji__WEBPACK_IMPORTED_MODULE_15__["EmojiModule"]
+                _ctrl_ngx_emoji_mart_ngx_emoji__WEBPACK_IMPORTED_MODULE_15__["EmojiModule"],
+                _angular_material__WEBPACK_IMPORTED_MODULE_16__["MatDialogModule"]
             ],
             providers: [{
                     provide: _angular_common_http__WEBPACK_IMPORTED_MODULE_8__["HTTP_INTERCEPTORS"],
                     useClass: _shared_services_http_interceptor_service__WEBPACK_IMPORTED_MODULE_13__["HttpInterceptorService"],
                     multi: true
-                },],
+                },
+                { provide: _angular_material__WEBPACK_IMPORTED_MODULE_16__["MAT_DIALOG_DEFAULT_OPTIONS"], useValue: { hasBackdrop: false } }],
+            entryComponents: [_video_chat_box_video_chat_box_component__WEBPACK_IMPORTED_MODULE_17__["VideoChatBoxComponent"]],
             bootstrap: [_app_component__WEBPACK_IMPORTED_MODULE_2__["AppComponent"]]
         })
     ], AppModule);
@@ -240,7 +249,7 @@ var AppModule = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = ".home{\n    width: 100vw;\n    height: 100vh;\n}\n\n.mat-drawer-container{\n    height: 100%;\n}\n\n.mat-drawer{\n    width: 20vw\n}\n\n.row{\n    margin: 0;\n}\n\n.chat-body{\n    height: 95vh;\n    /* width: 75vw; */\n}\n\n.menu{\n    height: 5vh;\n}"
+module.exports = ".home{\n    width: 100vw;\n    height: 100vh;\n}\n\n.mat-drawer-container{\n    height: 100%;\n}\n\n.mat-drawer{\n    width: 20vw\n}\n\n.row{\n    margin: 0;\n}\n\n.chat-body{\n    height: 95vh;\n    /* width: 75vw; */\n}\n\n.menu{\n    height: 5vh;\n    align-items: center;\n    background-color: lightblue;\n    display: flex;\n    justify-content: center;\n}\n\n.accept-call{\n    background-color: #286d28;\n    color: white;\n}\n\n.decline-call{\n    background-color: darkred;\n    color: white;\n}"
 
 /***/ }),
 
@@ -251,7 +260,7 @@ module.exports = ".home{\n    width: 100vw;\n    height: 100vh;\n}\n\n.mat-drawe
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<!-- <div class=\"row\">\n\n  <div class=\"col-4\">\n    <app-user-list></app-user-list>\n  </div>\n  <div class=\"col-8\">\n    <app-message-box></app-message-box>\n  </div>\n\n</div> -->\n<div class=\"home\">\n  <mat-drawer-container class=\"example-container\" autosize>\n    <mat-drawer #drawer class=\"example-sidenav\" mode=\"side\">\n\n      <app-user-list></app-user-list>\n    </mat-drawer>\n\n    <div class=\"row menu\">\n      <button type=\"button\" mat-button (click)=\"drawer.toggle()\">\n        Toggle sidenav\n      </button>\n    </div>\n    <div class=\"chat-body\">\n      <app-message-box class=\"w-100\"></app-message-box>\n    </div>\n\n  </mat-drawer-container>\n</div>"
+module.exports = "<!-- <div class=\"row\">\n\n  <div class=\"col-4\">\n    <app-user-list></app-user-list>\n  </div>\n  <div class=\"col-8\">\n    <app-message-box></app-message-box>\n  </div>\n\n</div> -->\n<div class=\"home\">\n  <mat-drawer-container class=\"example-container\" autosize>\n    <mat-drawer #drawer class=\"example-sidenav\" mode=\"side\">\n\n      <app-user-list></app-user-list>\n    </mat-drawer>\n\n    <audio #callerTune src=\"../../assets/audio/hangouts_call.mp3\" loop></audio>\n\n    <div *ngIf=\"isIncomingCall\" class=\"menu\">\n      <button type=\"button\" mat-button class=\"accept-call mr-3\" (click)=\"acceptCall()\">\n        Accept\n      </button>\n      <div class=\"caller-name\">\n        {{caller}}\n      </div>\n      <button type=\"button\" mat-button class=\"decline-call ml-3\" (click)=\"declineCall()\">\n        Decline\n      </button>\n    </div>\n    <div class=\"chat-body\">\n      <app-message-box class=\"w-100\"></app-message-box>\n    </div>\n\n  </mat-drawer-container>\n</div>"
 
 /***/ }),
 
@@ -267,6 +276,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "HomeComponent", function() { return HomeComponent; });
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
 /* harmony import */ var _angular_material__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/material */ "./node_modules/@angular/material/esm5/material.es5.js");
+/* harmony import */ var _shared_services_video_call_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../shared/services/video-call.service */ "./src/app/shared/services/video-call.service.ts");
+/* harmony import */ var _shared_services_messaging_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../shared/services/messaging.service */ "./src/app/shared/services/messaging.service.ts");
+/* harmony import */ var _video_chat_box_video_chat_box_component__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../video-chat-box/video-chat-box.component */ "./src/app/video-chat-box/video-chat-box.component.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -278,24 +290,138 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 };
 
 
+
+
+
 var HomeComponent = /** @class */ (function () {
-    function HomeComponent() {
+    function HomeComponent(videoCallService, socketService, dialogService) {
+        this.videoCallService = videoCallService;
+        this.socketService = socketService;
+        this.dialogService = dialogService;
+        this.isIncomingCall = false;
+        var userData = JSON.parse(localStorage.getItem('user-data'));
+        if (userData) {
+            this.caller = userData['name'];
+        }
+        console.log("CAller!", this.caller);
     }
     HomeComponent.prototype.ngOnInit = function () {
         // open nav by default
         this.drawer.open();
+        this.subscribeToPeerKeyFromServer();
+        this.subscribeToInitatorData();
+        this.subscribeToUserData();
+        this.subscribeToDialogBox();
+    };
+    HomeComponent.prototype.openVideoBox = function (data) {
+        var dialogConfig = new _angular_material__WEBPACK_IMPORTED_MODULE_1__["MatDialogConfig"]();
+        // dialogConfig.disableClose = true;
+        dialogConfig.autoFocus = true;
+        dialogConfig.data = data;
+        dialogConfig.height = "80vh";
+        dialogConfig.width = "80vw";
+        this.dialogService.open(_video_chat_box_video_chat_box_component__WEBPACK_IMPORTED_MODULE_4__["VideoChatBoxComponent"], dialogConfig);
+    };
+    HomeComponent.prototype.acceptCall = function () {
+        this.openVideoBox(this.initData);
+        this.isIncomingCall = false;
+        this.stopCallerTune();
+    };
+    HomeComponent.prototype.declineCall = function () {
+        console.log("Decline");
+        this.resetValues();
+    };
+    HomeComponent.prototype.subscribeToDialogBox = function () {
+        var _this = this;
+        this.closeDialog$ = this.dialogService.afterAllClosed.subscribe(function (data) {
+            _this.resetValues();
+        });
+    };
+    HomeComponent.prototype.subscribeToUserData = function () {
+        var _this = this;
+        this.userDataForVideo$ = this.videoCallService.getSelectedUser().subscribe(function (userData) {
+            //open dialog here for initiator
+            console.log("User Data", userData);
+            if (userData['receiverId'] && userData['senderId']) {
+                var data = {
+                    key: undefined,
+                    isInitiator: true,
+                    receiverId: userData['receiverId'],
+                    senderId: userData['senderId'],
+                    caller: _this.caller
+                };
+                _this.openVideoBox(data);
+            }
+        });
+    };
+    HomeComponent.prototype.subscribeToInitatorData = function () {
+        var _this = this;
+        this.initiatorData$ = this.videoCallService.getInitiatorData().subscribe(function (initData) {
+            console.log("INIT Data", initData);
+            // open video dialog for receiver, so set initiator as false
+            if (initData['key']) {
+                _this.caller = initData['caller'];
+                _this.isIncomingCall = true;
+                initData['isInitiator'] = false;
+                _this.initData = initData;
+                _this.callerTune.nativeElement.play();
+            }
+        });
+    };
+    HomeComponent.prototype.subscribeToPeerKeyFromServer = function () {
+        var _this = this;
+        this.peerKeyFromServer$ = this.socketService.receivePeerKey().subscribe(function (data) {
+            // connect to receiver if it is the initator!!
+            if (data['isInitiator']) {
+                _this.videoCallService.setInitiatorData(data);
+            }
+            else if (data['isInitiator'] === false) {
+                _this.videoCallService.setReceiverData(data);
+            }
+        });
+    };
+    HomeComponent.prototype.resetValues = function () {
+        this.stopCallerTune();
+        this.initData = {};
+        this.isIncomingCall = false;
+        this.videoCallService.setSelectedUser({});
+        this.videoCallService.setInitiatorData({});
+    };
+    HomeComponent.prototype.stopCallerTune = function () {
+        this.callerTune.nativeElement.pause();
+        this.callerTune.nativeElement.currentTime = 0;
+    };
+    HomeComponent.prototype.ngOnDestroy = function () {
+        if (this.userDataForVideo$) {
+            this.userDataForVideo$.unsubscribe();
+        }
+        if (this.peerKeyFromServer$) {
+            this.peerKeyFromServer$.unsubscribe();
+        }
+        if (this.initiatorData$) {
+            this.initiatorData$.unsubscribe();
+        }
+        if (this.closeDialog$) {
+            this.closeDialog$.unsubscribe();
+        }
     };
     __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["ViewChild"])('drawer'),
         __metadata("design:type", _angular_material__WEBPACK_IMPORTED_MODULE_1__["MatDrawer"])
     ], HomeComponent.prototype, "drawer", void 0);
+    __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["ViewChild"])('callerTune'),
+        __metadata("design:type", _angular_core__WEBPACK_IMPORTED_MODULE_0__["ElementRef"])
+    ], HomeComponent.prototype, "callerTune", void 0);
     HomeComponent = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
             selector: 'app-home',
             template: __webpack_require__(/*! ./home.component.html */ "./src/app/home/home.component.html"),
             styles: [__webpack_require__(/*! ./home.component.css */ "./src/app/home/home.component.css")]
         }),
-        __metadata("design:paramtypes", [])
+        __metadata("design:paramtypes", [_shared_services_video_call_service__WEBPACK_IMPORTED_MODULE_2__["VideoCallService"],
+            _shared_services_messaging_service__WEBPACK_IMPORTED_MODULE_3__["MessagingService"],
+            _angular_material__WEBPACK_IMPORTED_MODULE_1__["MatDialog"]])
     ], HomeComponent);
     return HomeComponent;
 }());
@@ -477,7 +603,7 @@ var LoginComponent = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = ".sentText{\n    /* background-color: beige; */\n    /* justify-content: flex-end; */\n    background-color: #0C61F2;\n    color: whitesmoke;\n    float: right;\n}\n\n.receivedText{\n    background-color: white;\n    /* justify-content: flex-start; */\n    float: left;\n}\n\n.text-box{\n    display: flex;\n    position: fixed;\n    bottom: 3px;\n    width: 100%;\n    height: 7vh;\n}\n\ntextarea{\n    width: 72%;\n}\n\nbutton{\n    width: 6%;\n}\n\n.chat-area{\n    width: 100%;\n    height: 100%;\n    background-color: #d4d0d2;\n}\n\nmat-list-item{\n    border: 1px solid;\n    margin: 5px;\n}\n\n.emotion{\n    display: inline-block;\n    float: right;\n    position: relative;\n    bottom: -14px;\n    margin-right: 4px;\n    color: #0C61F2;\n}\n\n.text{\n    /* display: flex; */\n    /* border: 1px solid white; */\n    margin: 8px;\n    padding: 8px 16px;\n    border-radius: 5%;\n}\n\n.chat-body{\n    display: flex;\n    flex-direction: column;\n    max-height: 83vh;\n    overflow: scroll;\n}\n\n.chat-header{\n    height: 5vh;\n    background-color: #0C61F2;\n    color: white;\n    display: flex;\n    justify-content: center;\n    align-items: center;\n}\n\n.emoji-container{\n    position: relative;\n    left: -22vw;\n    bottom: 44vh;\n}\n\n.emoji-icon{\n    position: relative;\n    bottom: -20px;\n}"
+module.exports = ".sentText{\n    /* background-color: beige; */\n    /* justify-content: flex-end; */\n    background-color: #0C61F2;\n    color: whitesmoke;\n    float: right;\n}\n\n.receivedText{\n    background-color: white;\n    /* justify-content: flex-start; */\n    float: left;\n}\n\n.text-box{\n    display: flex;\n    position: fixed;\n    bottom: 3px;\n    width: 100%;\n    height: 7vh;\n}\n\ntextarea{\n    width: 72%;\n}\n\nbutton{\n    width: 6%;\n}\n\n.chat-area{\n    width: 100%;\n    height: 100%;\n    background-color: #d4d0d2;\n}\n\nmat-list-item{\n    border: 1px solid;\n    margin: 5px;\n}\n\n.emotion{\n    display: inline-block;\n    float: right;\n    position: relative;\n    bottom: -14px;\n    margin-right: 4px;\n    color: #0C61F2;\n}\n\n.text{\n    /* display: flex; */\n    /* border: 1px solid white; */\n    margin: 8px;\n    padding: 8px 16px;\n    border-radius: 5%;\n}\n\n.chat-body{\n    display: flex;\n    flex-direction: column;\n    max-height: 88vh;\n    overflow: scroll;\n}\n\n.chat-header{\n    height: 5vh;\n    background-color: #0C61F2;\n    color: white;\n    display: flex;\n    justify-content: center;\n    align-items: center;\n}\n\n.emoji-container{\n    position: relative;\n    left: -22vw;\n    bottom: 44vh;\n}\n\n.emoji-icon{\n    position: relative;\n    bottom: -20px;\n}"
 
 /***/ }),
 
@@ -488,7 +614,7 @@ module.exports = ".sentText{\n    /* background-color: beige; */\n    /* justify
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"chat-area\" *ngIf=\"receiverUser['userId']\">\n    <!-- <mat-list>\n        <mat-list-item *ngFor=\"let message of messageList; let i = index\"\n            [ngClass]=\"{ sentText: message.senderId === currentUserId, receivedText: message.senderId !== currentUserId}\"\n            (click)=\"onSelectUser(i)\">\n            {{message?.message}}\n        </mat-list-item>\n    </mat-list> -->\n\n    <div class=\"chat-header\">\n        <div class=\"mr-3\">\n            {{receiverUser['name']}}\n        </div>\n        <mat-icon (click)=\"connectPeer()\" matListIcon>videocam</mat-icon>\n        <mat-icon class=\"ml-4\" *ngIf=\"isIncomingCall\" (click)=\"createPeerInstance()\" matListIcon>music_video</mat-icon>\n    </div>\n\n    <video *ngIf=\"true\" #streamVideo width=\"400\" height=\"500\" muted=\"muted\"></video>\n    <input #inp type=\"file\" style=\"display: none\" />\n\n    <div #chatBody *ngIf=\"false\" class=\"chat-body\">\n        <div *ngFor=\"let message of messageList; let i = index\">\n\n            <div class=\"text\"\n                [ngClass]=\"{ sentText: message.senderId === currentUserId, receivedText: message.senderId !== currentUserId}\">\n                {{message.message}}\n\n            </div>\n\n\n            <div class=\"emotion\" *ngIf=\"message.senderId === currentUserId\">\n                <ngx-emoji *ngIf=\"message.sentiment == 'positive'\" [emoji]=\"{ id: 'grin'}\" size=\"20\"></ngx-emoji>\n                <!-- <span *ngIf=\"message.sentiment == 'positive'\">\n                    :)\n                </span> -->\n                <ngx-emoji *ngIf=\"message.sentiment == 'negative'\" [emoji]=\"{ id: 'slightly_frowning_face'}\" size=\"20\">\n                </ngx-emoji>\n                <!-- <span *ngIf=\"message.sentiment == 'negative'\">\n                    :(\n                </span> -->\n                <ngx-emoji *ngIf=\"message.sentiment == 'neutral'\" [emoji]=\"{ id: 'neutral_face'}\" size=\"20\">\n                </ngx-emoji>\n                <!-- <span *ngIf=\"message.sentiment == 'neutral'\">\n                    :|\n                </span> -->\n            </div>\n        </div>\n\n    </div>\n\n\n    <div class=\"text-box\">\n        <mat-icon class=\"emoji-icon\" (click)=\"toggleEmojiLayout()\" matListIcon>tag_faces</mat-icon>\n        <textarea #textInp [(ngModel)]=\"message\">\n        </textarea>\n\n        <button mat-raised-button [ngClass]=\"{'primary-blue': message.length > 0}\" [disabled]=\"message.length === 0\"\n            (click)=\"onEnterMessage()\">Send</button>\n\n        <div *ngIf=\"showEmoji\" class=\"emoji-container\">\n\n            <emoji-mart (emojiClick)=\"addEmoji($event)\"></emoji-mart>\n        </div>\n    </div>\n\n</div>"
+module.exports = "<div class=\"chat-area\" *ngIf=\"receiverUser['userId']\">\n    <!-- <mat-list>\n        <mat-list-item *ngFor=\"let message of messageList; let i = index\"\n            [ngClass]=\"{ sentText: message.senderId === currentUserId, receivedText: message.senderId !== currentUserId}\"\n            (click)=\"onSelectUser(i)\">\n            {{message?.message}}\n        </mat-list-item>\n    </mat-list> -->\n\n    <div class=\"chat-header\">\n        <div class=\"mr-3\">\n            {{receiverUser['name']}}\n        </div>\n        <mat-icon (click)=\"initiateVideoCall()\" matListIcon>videocam</mat-icon>\n    </div>\n\n\n    <input #inp type=\"file\" style=\"display: none\" />\n\n    <div #chatBody class=\"chat-body\">\n        <div *ngFor=\"let message of messageList; let i = index\">\n\n            <div class=\"text\"\n                [ngClass]=\"{ sentText: message.senderId === currentUserId, receivedText: message.senderId !== currentUserId}\">\n                {{message.message}}\n\n            </div>\n\n\n            <div class=\"emotion\" *ngIf=\"message.senderId === currentUserId\">\n                <ngx-emoji *ngIf=\"message.sentiment == 'positive'\" [emoji]=\"{ id: 'grin'}\" size=\"20\"></ngx-emoji>\n                <!-- <span *ngIf=\"message.sentiment == 'positive'\">\n                    :)\n                </span> -->\n                <ngx-emoji *ngIf=\"message.sentiment == 'negative'\" [emoji]=\"{ id: 'slightly_frowning_face'}\" size=\"20\">\n                </ngx-emoji>\n                <!-- <span *ngIf=\"message.sentiment == 'negative'\">\n                    :(\n                </span> -->\n                <ngx-emoji *ngIf=\"message.sentiment == 'neutral'\" [emoji]=\"{ id: 'neutral_face'}\" size=\"20\">\n                </ngx-emoji>\n                <!-- <span *ngIf=\"message.sentiment == 'neutral'\">\n                    :|\n                </span> -->\n            </div>\n        </div>\n\n    </div>\n\n\n    <div class=\"text-box\">\n        <mat-icon class=\"emoji-icon\" (click)=\"toggleEmojiLayout()\" matListIcon>tag_faces</mat-icon>\n        <textarea #textInp [(ngModel)]=\"message\">\n        </textarea>\n\n        <button mat-raised-button [ngClass]=\"{'primary-blue': message.length > 0}\" [disabled]=\"message.length === 0\"\n            (click)=\"onEnterMessage()\">Send</button>\n\n        <div *ngIf=\"showEmoji\" class=\"emoji-container\">\n\n            <emoji-mart (emojiClick)=\"addEmoji($event)\"></emoji-mart>\n        </div>\n    </div>\n\n</div>"
 
 /***/ }),
 
@@ -505,6 +631,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
 /* harmony import */ var _shared_services_user_service__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../shared/services/user.service */ "./src/app/shared/services/user.service.ts");
 /* harmony import */ var _shared_services_messaging_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../shared/services/messaging.service */ "./src/app/shared/services/messaging.service.ts");
+/* harmony import */ var _shared_services_video_call_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../shared/services/video-call.service */ "./src/app/shared/services/video-call.service.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -517,11 +644,13 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 
 
 
+
 // import { Peer } from 'simple-peer';
 var MessageBoxComponent = /** @class */ (function () {
-    function MessageBoxComponent(userService, messagingService) {
+    function MessageBoxComponent(userService, messagingService, videoCallService) {
         this.userService = userService;
         this.messagingService = messagingService;
+        this.videoCallService = videoCallService;
         this.message = '';
         this.messageList = [];
         this.receiverUser = {};
@@ -534,82 +663,6 @@ var MessageBoxComponent = /** @class */ (function () {
         this.currentUserId = userData.userId;
         this.subscribeToSelectUser();
         this.subscribeToMessages();
-        this.subscribeToPeerKey();
-        console.log('Peer');
-    };
-    MessageBoxComponent.prototype.createPeerInstance = function () {
-        var _this = this;
-        if (this.peer1) {
-            console.log("Destroying");
-            this.peer1.destroy();
-        }
-        // get media stream and use it to create the webrtc peer
-        navigator.getUserMedia({ audio: true, video: true }, function (stream) {
-            // create peer
-            _this.peer1 = new SimplePeer({
-                initiator: _this.isInitiator,
-                stream: stream,
-                trickle: false
-            });
-            // connect to initiator if you're the receiver
-            if (!_this.isInitiator) {
-                console.log("Received request, now connecting");
-                _this.peer1.signal(_this.initiatorPeerKey);
-            }
-            _this.peer1.on('signal', function (data) {
-                console.log("SIGNAL!!", data.type, _this.isInitiator);
-                // create intiator connection 
-                if (data.type === 'offer') {
-                    var payload = {
-                        key: data,
-                        receiverId: _this.receiverUser['userId']
-                    };
-                    _this.messagingService.sendPeerConnectionRequest(payload);
-                }
-                else if (data.type === 'answer') {
-                    console.log("In receiver!");
-                    _this.receiverPeerKey = data;
-                    var payload = {
-                        key: data,
-                        receiverId: _this.receiverUser['userId']
-                    };
-                    _this.messagingService.sendPeerConnectionRequest(payload);
-                }
-            });
-            _this.peer1.on('connect', function () {
-                console.log("Connected !!", _this.isInitiator);
-            });
-            _this.peer1.on('data', function (data) {
-                console.log("DATA!!!!!");
-            });
-            _this.peer1.on('stream', function (streamData) {
-                console.log("Stream started", streamData);
-                if (streamData) {
-                    _this.videoEle.nativeElement.srcObject = streamData;
-                    _this.videoEle.nativeElement.play();
-                }
-            });
-        }, function (err) {
-            console.error("ERRROR!", err);
-        });
-    };
-    MessageBoxComponent.prototype.subscribeToPeerKey = function () {
-        var _this = this;
-        this.peerKey$ = this.messagingService.receivePeerKey().subscribe(function (key) {
-            console.log("Key Peer-----", key, _this.isInitiator);
-            // connect to receiver if it is the initator!!
-            if (_this.isInitiator) {
-                _this.peer1.signal(key);
-                return;
-            }
-            _this.isInitiator = false;
-            _this.initiatorPeerKey = key;
-            _this.isIncomingCall = true;
-        });
-    };
-    MessageBoxComponent.prototype.connectPeer = function () {
-        this.isInitiator = true;
-        this.createPeerInstance();
     };
     MessageBoxComponent.prototype.subscribeToSelectUser = function () {
         var _this = this;
@@ -636,7 +689,7 @@ var MessageBoxComponent = /** @class */ (function () {
     };
     MessageBoxComponent.prototype.scrollToBottom = function () {
         console.log("Scroll!");
-        // this.chatBodyEle.nativeElement.scrollTop = this.chatBodyEle.nativeElement.scrollHeight;
+        this.chatBodyEle.nativeElement.scrollTop = this.chatBodyEle.nativeElement.scrollHeight;
     };
     MessageBoxComponent.prototype.onEnterMessage = function () {
         console.log("Message entered!", this.message, this.chatId, this.receiverUser['userId']);
@@ -677,6 +730,13 @@ var MessageBoxComponent = /** @class */ (function () {
     MessageBoxComponent.prototype.toggleEmojiLayout = function () {
         this.showEmoji = !this.showEmoji;
     };
+    MessageBoxComponent.prototype.initiateVideoCall = function () {
+        console.log("Initiate Video CAll");
+        this.videoCallService.setSelectedUser({
+            senderId: this.currentUserId,
+            receiverId: this.receiverUser['userId'],
+        });
+    };
     MessageBoxComponent.prototype.ngOnDestroy = function () {
         if (this.getSelectedUser$) {
             this.getSelectedUser$.unsubscribe();
@@ -696,9 +756,9 @@ var MessageBoxComponent = /** @class */ (function () {
         }
     };
     __decorate([
-        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["ViewChild"])('streamVideo'),
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["ViewChild"])('chatBody'),
         __metadata("design:type", _angular_core__WEBPACK_IMPORTED_MODULE_0__["ElementRef"])
-    ], MessageBoxComponent.prototype, "videoEle", void 0);
+    ], MessageBoxComponent.prototype, "chatBodyEle", void 0);
     __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["ViewChild"])('textInp'),
         __metadata("design:type", _angular_core__WEBPACK_IMPORTED_MODULE_0__["ElementRef"])
@@ -710,7 +770,8 @@ var MessageBoxComponent = /** @class */ (function () {
             styles: [__webpack_require__(/*! ./message-box.component.css */ "./src/app/message-box/message-box.component.css")]
         }),
         __metadata("design:paramtypes", [_shared_services_user_service__WEBPACK_IMPORTED_MODULE_1__["UserService"],
-            _shared_services_messaging_service__WEBPACK_IMPORTED_MODULE_2__["MessagingService"]])
+            _shared_services_messaging_service__WEBPACK_IMPORTED_MODULE_2__["MessagingService"],
+            _shared_services_video_call_service__WEBPACK_IMPORTED_MODULE_3__["VideoCallService"]])
     ], MessageBoxComponent);
     return MessageBoxComponent;
 }());
@@ -1087,6 +1148,69 @@ var UserService = /** @class */ (function () {
 
 /***/ }),
 
+/***/ "./src/app/shared/services/video-call.service.ts":
+/*!*******************************************************!*\
+  !*** ./src/app/shared/services/video-call.service.ts ***!
+  \*******************************************************/
+/*! exports provided: VideoCallService */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "VideoCallService", function() { return VideoCallService; });
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! rxjs */ "./node_modules/rxjs/_esm5/index.js");
+var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (undefined && undefined.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+var VideoCallService = /** @class */ (function () {
+    function VideoCallService() {
+        this.userData = new rxjs__WEBPACK_IMPORTED_MODULE_1__["Subject"]();
+        this.userData$ = this.userData.asObservable();
+        this.initiatorData = new rxjs__WEBPACK_IMPORTED_MODULE_1__["Subject"]();
+        this.initiatorData$ = this.initiatorData.asObservable();
+        this.receiverData = new rxjs__WEBPACK_IMPORTED_MODULE_1__["Subject"]();
+        this.receiverData$ = this.receiverData.asObservable();
+    }
+    VideoCallService.prototype.getSelectedUser = function () {
+        return this.userData$;
+    };
+    VideoCallService.prototype.setSelectedUser = function (user) {
+        this.userData.next(user);
+    };
+    VideoCallService.prototype.getInitiatorData = function () {
+        return this.initiatorData$;
+    };
+    VideoCallService.prototype.setInitiatorData = function (initData) {
+        this.initiatorData.next(initData);
+    };
+    VideoCallService.prototype.getReceiverData = function () {
+        return this.receiverData$;
+    };
+    VideoCallService.prototype.setReceiverData = function (receiverData) {
+        this.receiverData.next(receiverData);
+    };
+    VideoCallService = __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Injectable"])({
+            providedIn: 'root'
+        }),
+        __metadata("design:paramtypes", [])
+    ], VideoCallService);
+    return VideoCallService;
+}());
+
+
+
+/***/ }),
+
 /***/ "./src/app/user-list/user-list.component.css":
 /*!***************************************************!*\
   !*** ./src/app/user-list/user-list.component.css ***!
@@ -1190,6 +1314,204 @@ var UserListComponent = /** @class */ (function () {
         __metadata("design:paramtypes", [_shared_services_user_service__WEBPACK_IMPORTED_MODULE_1__["UserService"]])
     ], UserListComponent);
     return UserListComponent;
+}());
+
+
+
+/***/ }),
+
+/***/ "./src/app/video-chat-box/video-chat-box.component.css":
+/*!*************************************************************!*\
+  !*** ./src/app/video-chat-box/video-chat-box.component.css ***!
+  \*************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = ".main-video{\n    height: 70vh;\n    width: 75vw;\n}\n\n.mat-icon {\n    font-size: 40px;\n    margin: auto;\n    color: #DC143C;\n  }\n\n.side-video{\n    position: absolute;\n    /* display: inline; */\n    z-index: 3;\n    width: 180px;\n    /* top: -226px; */\n    top: 11vh;\n    right: 11vw;\n  }\n\n.mat-dialog-content{\n      height: 70vh;\n      max-height: unset !important;\n  }"
+
+/***/ }),
+
+/***/ "./src/app/video-chat-box/video-chat-box.component.html":
+/*!**************************************************************!*\
+  !*** ./src/app/video-chat-box/video-chat-box.component.html ***!
+  \**************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "<mat-dialog-content>\n  <video #streamVideo class=\"main-video\" muted=\"muted\"></video>\n  <video #selfVideo class=\"side-video\" muted=\"muted\"></video>\n</mat-dialog-content>\n<mat-dialog-actions>\n  <mat-icon (click)=\"endVideoCall()\" matListIcon>call_end</mat-icon>\n</mat-dialog-actions>"
+
+/***/ }),
+
+/***/ "./src/app/video-chat-box/video-chat-box.component.ts":
+/*!************************************************************!*\
+  !*** ./src/app/video-chat-box/video-chat-box.component.ts ***!
+  \************************************************************/
+/*! exports provided: VideoChatBoxComponent */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "VideoChatBoxComponent", function() { return VideoChatBoxComponent; });
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var _shared_services_messaging_service__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../shared/services/messaging.service */ "./src/app/shared/services/messaging.service.ts");
+/* harmony import */ var _angular_material__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/material */ "./node_modules/@angular/material/esm5/material.es5.js");
+var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (undefined && undefined.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+var __param = (undefined && undefined.__param) || function (paramIndex, decorator) {
+    return function (target, key) { decorator(target, key, paramIndex); }
+};
+
+
+
+var VideoChatBoxComponent = /** @class */ (function () {
+    function VideoChatBoxComponent(messagingService, dialogRef, data) {
+        this.messagingService = messagingService;
+        this.dialogRef = dialogRef;
+        this.peerKey = data['key'];
+        this.isInitiator = data['isInitiator'];
+        this.receiverId = data['receiverId'];
+        this.currentId = data['senderId'];
+        this.caller = data['caller'];
+    }
+    VideoChatBoxComponent.prototype.ngOnInit = function () {
+        if (this.isInitiator) {
+            this.subscribeToReceiverKey();
+        }
+        this.createPeerInstance();
+    };
+    VideoChatBoxComponent.prototype.subscribeToReceiverKey = function () {
+        var _this = this;
+        this.peerKey$ = this.messagingService.receivePeerKey().subscribe(function (data) {
+            console.log("Key Peer-----", data, _this.isInitiator);
+            // connect to receiver if it is the initator!!
+            _this.peer.signal(data['key']);
+        });
+    };
+    VideoChatBoxComponent.prototype.createSelfVideoSteam = function () {
+        var _this = this;
+        navigator.getUserMedia({ video: true }, function (stream) {
+            // show self video
+            _this.selfVideo.nativeElement.srcObject = stream;
+            _this.selfVideo.nativeElement.play();
+        }, function (err) {
+            console.log("Error", err);
+        });
+    };
+    VideoChatBoxComponent.prototype.createPeerInstance = function () {
+        var _this = this;
+        if (this.peer) {
+            console.log("Destroying");
+            this.peer.destroy();
+        }
+        // get media stream and use it to create the webrtc peer
+        navigator.getUserMedia({ audio: true, video: true }, function (stream) {
+            _this.createSelfVideoSteam();
+            // create peer
+            _this.peer = new SimplePeer({
+                initiator: _this.isInitiator,
+                stream: stream,
+                trickle: false
+            });
+            // connect to initiator if you're the receiver
+            if (!_this.isInitiator) {
+                console.log("Received request, now connecting");
+                _this.peer.signal(_this.peerKey);
+            }
+            _this.peer.on('signal', function (data) {
+                console.log("SIGNAL!!", data.type, _this.isInitiator);
+                // create intiator connection 
+                if (data.type === 'offer') {
+                    var payload = {
+                        key: data,
+                        receiverId: _this.receiverId,
+                        senderId: _this.currentId,
+                        isInitiator: true,
+                        caller: _this.caller
+                    };
+                    _this.messagingService.sendPeerConnectionRequest(payload);
+                }
+                else if (data.type === 'answer') {
+                    console.log("In receiver!");
+                    // this.receiverPeerKey = data;
+                    var payload = {
+                        key: data,
+                        receiverId: _this.currentId,
+                        senderId: _this.receiverId,
+                        isInitiator: false,
+                        caller: _this.caller
+                    };
+                    _this.messagingService.sendPeerConnectionRequest(payload);
+                }
+            });
+            _this.peer.on('connect', function () {
+                console.log("Connected !!", _this.isInitiator);
+            });
+            _this.peer.on('disconnect', function () {
+                console.log("Disconnected");
+            });
+            _this.peer.on('stream', function (streamData) {
+                console.log("Stream started", streamData);
+                if (streamData) {
+                    _this.streamVideo.nativeElement.srcObject = streamData;
+                    _this.streamVideo.nativeElement.play();
+                }
+            });
+        }, function (err) {
+            console.error("ERRROR!", err);
+        });
+    };
+    VideoChatBoxComponent.prototype.destroyVideoStream = function (videoElement) {
+        console.log("In Destroy~");
+        if (videoElement && videoElement.srcObject) {
+            var stream = videoElement.srcObject;
+            var tracks = stream.getTracks();
+            if (tracks) {
+                tracks.forEach(function (track) {
+                    track.stop();
+                });
+            }
+            videoElement.srcObject = null;
+        }
+    };
+    VideoChatBoxComponent.prototype.endVideoCall = function () {
+        this.dialogRef.close();
+    };
+    VideoChatBoxComponent.prototype.ngOnDestroy = function () {
+        if (this.peer) {
+            this.peer.destroy();
+        }
+        if (this.peerKey$) {
+            this.peerKey$.unsubscribe();
+        }
+        this.destroyVideoStream(this.streamVideo.nativeElement);
+        this.destroyVideoStream(this.selfVideo.nativeElement);
+    };
+    __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["ViewChild"])('streamVideo'),
+        __metadata("design:type", _angular_core__WEBPACK_IMPORTED_MODULE_0__["ElementRef"])
+    ], VideoChatBoxComponent.prototype, "streamVideo", void 0);
+    __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["ViewChild"])('selfVideo'),
+        __metadata("design:type", _angular_core__WEBPACK_IMPORTED_MODULE_0__["ElementRef"])
+    ], VideoChatBoxComponent.prototype, "selfVideo", void 0);
+    VideoChatBoxComponent = __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
+            selector: 'app-video-chat-box',
+            template: __webpack_require__(/*! ./video-chat-box.component.html */ "./src/app/video-chat-box/video-chat-box.component.html"),
+            styles: [__webpack_require__(/*! ./video-chat-box.component.css */ "./src/app/video-chat-box/video-chat-box.component.css")]
+        }),
+        __param(2, Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Inject"])(_angular_material__WEBPACK_IMPORTED_MODULE_2__["MAT_DIALOG_DATA"])),
+        __metadata("design:paramtypes", [_shared_services_messaging_service__WEBPACK_IMPORTED_MODULE_1__["MessagingService"],
+            _angular_material__WEBPACK_IMPORTED_MODULE_2__["MatDialogRef"], Object])
+    ], VideoChatBoxComponent);
+    return VideoChatBoxComponent;
 }());
 
 
