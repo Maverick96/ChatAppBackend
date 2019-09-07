@@ -30,6 +30,7 @@ module.exports = (sequelize, DataTypes) => {
             type: DataTypes.STRING,
         },
     }, {
+            // to allow emoji to be stored in db
             charset: "utf8mb4",
             collation: "utf8mb4_bin"
         });

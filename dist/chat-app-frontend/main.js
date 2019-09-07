@@ -84,7 +84,7 @@ module.exports = ""
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<!--The content below is only a placeholder and can be replaced.-->\n<div style=\"text-align:center\">\n\n  <router-outlet></router-outlet>\n</div>"
+module.exports = "<!--The content below is only a placeholder and can be replaced.-->\n<div style=\"text-align:center\">\n  <app-loader></app-loader>\n  <router-outlet></router-outlet>\n</div>"
 
 /***/ }),
 
@@ -108,7 +108,6 @@ var __decorate = (undefined && undefined.__decorate) || function (decorators, ta
 
 var AppComponent = /** @class */ (function () {
     function AppComponent() {
-        this.title = 'chat-app-frontend';
     }
     AppComponent = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
@@ -135,6 +134,7 @@ var AppComponent = /** @class */ (function () {
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "BASE_URL", function() { return BASE_URL; });
 var BASE_URL = '';
+// const BASE_URL = environment.apiUrl;
 
 
 
@@ -168,6 +168,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _ctrl_ngx_emoji_mart_ngx_emoji__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! @ctrl/ngx-emoji-mart/ngx-emoji */ "./node_modules/@ctrl/ngx-emoji-mart/ngx-emoji/fesm5/ctrl-ngx-emoji-mart-ngx-emoji.js");
 /* harmony import */ var _angular_material__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! @angular/material */ "./node_modules/@angular/material/esm5/material.es5.js");
 /* harmony import */ var _video_chat_box_video_chat_box_component__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ./video-chat-box/video-chat-box.component */ "./src/app/video-chat-box/video-chat-box.component.ts");
+/* harmony import */ var _loader_loader_component__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ./loader/loader.component */ "./src/app/loader/loader.component.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -194,6 +195,7 @@ var __decorate = (undefined && undefined.__decorate) || function (decorators, ta
 
 
 
+
 var AppModule = /** @class */ (function () {
     function AppModule() {
     }
@@ -207,6 +209,7 @@ var AppModule = /** @class */ (function () {
                 _user_list_user_list_component__WEBPACK_IMPORTED_MODULE_10__["UserListComponent"],
                 _message_box_message_box_component__WEBPACK_IMPORTED_MODULE_11__["MessageBoxComponent"],
                 _video_chat_box_video_chat_box_component__WEBPACK_IMPORTED_MODULE_17__["VideoChatBoxComponent"],
+                _loader_loader_component__WEBPACK_IMPORTED_MODULE_18__["LoaderComponent"],
             ],
             imports: [
                 _angular_platform_browser__WEBPACK_IMPORTED_MODULE_0__["BrowserModule"],
@@ -221,7 +224,8 @@ var AppModule = /** @class */ (function () {
                 _angular_material__WEBPACK_IMPORTED_MODULE_16__["MatIconModule"],
                 _ctrl_ngx_emoji_mart__WEBPACK_IMPORTED_MODULE_14__["PickerModule"],
                 _ctrl_ngx_emoji_mart_ngx_emoji__WEBPACK_IMPORTED_MODULE_15__["EmojiModule"],
-                _angular_material__WEBPACK_IMPORTED_MODULE_16__["MatDialogModule"]
+                _angular_material__WEBPACK_IMPORTED_MODULE_16__["MatDialogModule"],
+                _angular_material__WEBPACK_IMPORTED_MODULE_16__["MatProgressSpinnerModule"]
             ],
             providers: [{
                     provide: _angular_common_http__WEBPACK_IMPORTED_MODULE_8__["HTTP_INTERCEPTORS"],
@@ -428,6 +432,83 @@ var HomeComponent = /** @class */ (function () {
 
 /***/ }),
 
+/***/ "./src/app/loader/loader.component.css":
+/*!*********************************************!*\
+  !*** ./src/app/loader/loader.component.css ***!
+  \*********************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = ".loader-container{\n    height: 100vh;\n    width: 100vw;\n    opacity: 0.4;\n    background-color: lightblue;\n    position: fixed;\n    z-index: 3;\n    display: flex;\n    justify-content: center;\n    align-items: center;\n}"
+
+/***/ }),
+
+/***/ "./src/app/loader/loader.component.html":
+/*!**********************************************!*\
+  !*** ./src/app/loader/loader.component.html ***!
+  \**********************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "<div *ngIf=\"isLoading\" class=\"loader-container\">\n  <mat-progress-spinner class=\"loader\" [color]=\"color\" [mode]=\"mode\"> </mat-progress-spinner>\n</div>"
+
+/***/ }),
+
+/***/ "./src/app/loader/loader.component.ts":
+/*!********************************************!*\
+  !*** ./src/app/loader/loader.component.ts ***!
+  \********************************************/
+/*! exports provided: LoaderComponent */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "LoaderComponent", function() { return LoaderComponent; });
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var _shared_services_loader_service__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../shared/services/loader.service */ "./src/app/shared/services/loader.service.ts");
+var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (undefined && undefined.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+var LoaderComponent = /** @class */ (function () {
+    function LoaderComponent(loaderService) {
+        this.loaderService = loaderService;
+        this.mode = 'indeterminate';
+        this.color = 'primary';
+    }
+    LoaderComponent.prototype.ngOnInit = function () {
+        var _this = this;
+        this.loaderStatus$ = this.loaderService.getLoaderStatus().subscribe(function (state) {
+            _this.isLoading = state;
+        });
+    };
+    LoaderComponent.prototype.ngOnDestroy = function () {
+        if (this.loaderStatus$) {
+            this.loaderStatus$.unsubscribe();
+        }
+    };
+    LoaderComponent = __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
+            selector: 'app-loader',
+            template: __webpack_require__(/*! ./loader.component.html */ "./src/app/loader/loader.component.html"),
+            styles: [__webpack_require__(/*! ./loader.component.css */ "./src/app/loader/loader.component.css")]
+        }),
+        __metadata("design:paramtypes", [_shared_services_loader_service__WEBPACK_IMPORTED_MODULE_1__["LoaderService"]])
+    ], LoaderComponent);
+    return LoaderComponent;
+}());
+
+
+
+/***/ }),
+
 /***/ "./src/app/login/login.component.css":
 /*!*******************************************!*\
   !*** ./src/app/login/login.component.css ***!
@@ -435,7 +516,7 @@ var HomeComponent = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = ".container{\n    margin-top: 15vh;\n    border: 1px solid black\n}\n\nlabel{\n    float: left;\n}\n\n.form-group{\n    margin-bottom: 10px;\n}"
+module.exports = ".container{\n    /* margin-top: 15vh; */\n    border: 1px solid black\n}\n\nlabel{\n    float: left;\n}\n\n.form-group{\n    margin-bottom: 10px;\n}"
 
 /***/ }),
 
@@ -612,7 +693,7 @@ module.exports = ".sentText{\n    /* background-color: beige; */\n    /* justify
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"chat-area\" *ngIf=\"receiverUser['userId']\">\n    <!-- <mat-list>\n        <mat-list-item *ngFor=\"let message of messageList; let i = index\"\n            [ngClass]=\"{ sentText: message.senderId === currentUserId, receivedText: message.senderId !== currentUserId}\"\n            (click)=\"onSelectUser(i)\">\n            {{message?.message}}\n        </mat-list-item>\n    </mat-list> -->\n\n    <div class=\"chat-header\">\n        <div class=\"mr-3\">\n            {{receiverUser['name']}}\n        </div>\n        <mat-icon (click)=\"initiateVideoCall()\" matListIcon>videocam</mat-icon>\n    </div>\n\n\n    <input #inp type=\"file\" style=\"display: none\" />\n\n    <div #chatBody class=\"chat-body\">\n        <div *ngFor=\"let message of messageList; let i = index\">\n\n            <div class=\"text\"\n                [ngClass]=\"{ sentText: message.senderId === currentUserId, receivedText: message.senderId !== currentUserId}\">\n                {{message.message}}\n\n            </div>\n\n\n            <div class=\"emotion\" *ngIf=\"message.senderId === currentUserId\">\n                <ngx-emoji *ngIf=\"message.sentiment == 'positive'\" [emoji]=\"{ id: 'grin'}\" size=\"20\"></ngx-emoji>\n                <!-- <span *ngIf=\"message.sentiment == 'positive'\">\n                    :)\n                </span> -->\n                <ngx-emoji *ngIf=\"message.sentiment == 'negative'\" [emoji]=\"{ id: 'slightly_frowning_face'}\" size=\"20\">\n                </ngx-emoji>\n                <!-- <span *ngIf=\"message.sentiment == 'negative'\">\n                    :(\n                </span> -->\n                <ngx-emoji *ngIf=\"message.sentiment == 'neutral'\" [emoji]=\"{ id: 'neutral_face'}\" size=\"20\">\n                </ngx-emoji>\n                <!-- <span *ngIf=\"message.sentiment == 'neutral'\">\n                    :|\n                </span> -->\n            </div>\n        </div>\n\n    </div>\n\n\n    <div class=\"text-box\">\n        <mat-icon class=\"emoji-icon\" (click)=\"toggleEmojiLayout()\" matListIcon>tag_faces</mat-icon>\n        <textarea #textInp [(ngModel)]=\"message\">\n        </textarea>\n\n        <button mat-raised-button [ngClass]=\"{'primary-blue': message.length > 0}\" [disabled]=\"message.length === 0\"\n            (click)=\"onEnterMessage()\">Send</button>\n\n        <div *ngIf=\"showEmoji\" class=\"emoji-container\">\n\n            <emoji-mart (emojiClick)=\"addEmoji($event)\"></emoji-mart>\n        </div>\n    </div>\n\n</div>"
+module.exports = "<div class=\"chat-area\" *ngIf=\"receiverUser['userId']\">\n    <!-- <mat-list>\n        <mat-list-item *ngFor=\"let message of messageList; let i = index\"\n            [ngClass]=\"{ sentText: message.senderId === currentUserId, receivedText: message.senderId !== currentUserId}\"\n            (click)=\"onSelectUser(i)\">\n            {{message?.message}}\n        </mat-list-item>\n    </mat-list> -->\n\n    <div class=\"chat-header\">\n        <div class=\"mr-3\">\n            {{receiverUser['name']}}\n        </div>\n        <mat-icon (click)=\"initiateVideoCall()\" matListIcon>videocam</mat-icon>\n    </div>\n\n\n    <input #inp type=\"file\" style=\"display: none\" />\n\n    <div #chatBody class=\"chat-body\">\n        <div *ngFor=\"let message of messageList; let i = index\">\n\n            <div class=\"text\"\n                [ngClass]=\"{ sentText: message.senderId === currentUserId, receivedText: message.senderId !== currentUserId}\">\n                {{message.message}}\n\n            </div>\n\n\n            <div class=\"emotion\">\n                <ngx-emoji *ngIf=\"message.sentiment == 'positive'\" [emoji]=\"{ id: 'grin'}\" size=\"20\"></ngx-emoji>\n                <!-- <span *ngIf=\"message.sentiment == 'positive'\">\n                    :)\n                </span> -->\n                <ngx-emoji *ngIf=\"message.sentiment == 'negative'\" [emoji]=\"{ id: 'slightly_frowning_face'}\" size=\"20\">\n                </ngx-emoji>\n                <!-- <span *ngIf=\"message.sentiment == 'negative'\">\n                    :(\n                </span> -->\n                <ngx-emoji *ngIf=\"message.sentiment == 'neutral'\" [emoji]=\"{ id: 'neutral_face'}\" size=\"20\">\n                </ngx-emoji>\n                <!-- <span *ngIf=\"message.sentiment == 'neutral'\">\n                    :|\n                </span> -->\n            </div>\n        </div>\n\n    </div>\n\n\n    <div class=\"text-box\">\n        <mat-icon class=\"emoji-icon\" (click)=\"toggleEmojiLayout()\" matListIcon>tag_faces</mat-icon>\n        <textarea #textInp [(ngModel)]=\"message\">\n        </textarea>\n\n        <button mat-raised-button [ngClass]=\"{'primary-blue': message.length > 0}\" [disabled]=\"message.length === 0\"\n            (click)=\"onEnterMessage()\">Send</button>\n\n        <div *ngIf=\"showEmoji\" class=\"emoji-container\">\n\n            <emoji-mart (emojiClick)=\"addEmoji($event)\"></emoji-mart>\n        </div>\n    </div>\n\n</div>"
 
 /***/ }),
 
@@ -691,6 +772,7 @@ var MessageBoxComponent = /** @class */ (function () {
     };
     MessageBoxComponent.prototype.onEnterMessage = function () {
         console.log("Message entered!", this.message, this.chatId, this.receiverUser['userId']);
+        this.toggleEmojiLayout();
         this.messageList.push({
             message: this.message,
             senderId: this.currentUserId
@@ -722,7 +804,6 @@ var MessageBoxComponent = /** @class */ (function () {
     MessageBoxComponent.prototype.addEmoji = function (event) {
         console.log("Event", event);
         this.message = this.message + event.emoji.native;
-        this.toggleEmojiLayout();
         // this.textInpEle.nativeElement.focus();
     };
     MessageBoxComponent.prototype.toggleEmojiLayout = function () {
@@ -902,7 +983,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "HttpInterceptorService", function() { return HttpInterceptorService; });
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
 /* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/fesm5/http.js");
-/* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! rxjs/operators */ "./node_modules/rxjs/_esm5/operators/index.js");
+/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! rxjs */ "./node_modules/rxjs/_esm5/index.js");
+/* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! rxjs/operators */ "./node_modules/rxjs/_esm5/operators/index.js");
+/* harmony import */ var _loader_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./loader.service */ "./src/app/shared/services/loader.service.ts");
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -915,10 +999,16 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 
 
 
+
+
+
 var HttpInterceptorService = /** @class */ (function () {
-    function HttpInterceptorService() {
+    function HttpInterceptorService(loaderService, router) {
+        this.loaderService = loaderService;
+        this.router = router;
     }
     HttpInterceptorService.prototype.intercept = function (request, next) {
+        var _this = this;
         var token = localStorage.getItem('token');
         console.log("TOKEN ", token);
         if (token) {
@@ -932,23 +1022,78 @@ var HttpInterceptorService = /** @class */ (function () {
             request = request.clone({ headers: request.headers.set('Content-Type', 'application/json') });
         }
         request = request.clone({ headers: request.headers.set('Accept', 'application/json') });
-        // this.loaderService.setLoaderState(true);
+        this.loaderService.setLoaderStatus(true);
         var self = this;
-        return next.handle(request).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["map"])(function (event) {
+        return next.handle(request).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["map"])(function (event) {
             if (event instanceof _angular_common_http__WEBPACK_IMPORTED_MODULE_1__["HttpResponse"]) {
-                console.log('event--->>>', event);
-                // self.loaderService.setLoaderState(false);
+                self.loaderService.setLoaderStatus(false);
             }
             return event;
+        }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["catchError"])(function (error) {
+            console.log("error", error);
+            if (error.status === 403) {
+                localStorage.clear();
+                _this.router.navigate(['login']);
+            }
+            _this.loaderService.setLoaderStatus(false);
+            return Object(rxjs__WEBPACK_IMPORTED_MODULE_2__["throwError"])(error);
         }));
     };
     HttpInterceptorService = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Injectable"])({
             providedIn: 'root'
         }),
-        __metadata("design:paramtypes", [])
+        __metadata("design:paramtypes", [_loader_service__WEBPACK_IMPORTED_MODULE_4__["LoaderService"],
+            _angular_router__WEBPACK_IMPORTED_MODULE_5__["Router"]])
     ], HttpInterceptorService);
     return HttpInterceptorService;
+}());
+
+
+
+/***/ }),
+
+/***/ "./src/app/shared/services/loader.service.ts":
+/*!***************************************************!*\
+  !*** ./src/app/shared/services/loader.service.ts ***!
+  \***************************************************/
+/*! exports provided: LoaderService */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "LoaderService", function() { return LoaderService; });
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! rxjs */ "./node_modules/rxjs/_esm5/index.js");
+var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (undefined && undefined.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+var LoaderService = /** @class */ (function () {
+    function LoaderService() {
+        this.loaderStatus = new rxjs__WEBPACK_IMPORTED_MODULE_1__["Subject"]();
+        this.loaderStatus$ = this.loaderStatus.asObservable();
+    }
+    LoaderService.prototype.getLoaderStatus = function () {
+        return this.loaderStatus$;
+    };
+    LoaderService.prototype.setLoaderStatus = function (state) {
+        this.loaderStatus.next(state);
+    };
+    LoaderService = __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Injectable"])({
+            providedIn: 'root'
+        }),
+        __metadata("design:paramtypes", [])
+    ], LoaderService);
+    return LoaderService;
 }());
 
 
