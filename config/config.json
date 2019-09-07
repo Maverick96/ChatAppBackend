@@ -1,8 +1,8 @@
 {
     "t-development": {
-        "username": "sql12303063",
-        "password": "fHHnl9WitW",
-        "database": "sql12303063",
+        "username": "sql12304353",
+        "password": "zJc57JC2Cu",
+        "database": "sql12304353",
         "host": "sql12.freemysqlhosting.net",
         "dialect": "mysql",
         "operatorsAliases": false,
@@ -27,9 +27,9 @@
         "logging": false
     },
     "production": {
-        "username": "sql12303063",
-        "password": "fHHnl9WitW",
-        "database": "sql12303063",
+        "username": "sql12304353",
+        "password": "zJc57JC2Cu",
+        "database": "sql12304353",
         "host": "sql12.freemysqlhosting.net",
         "dialect": "mysql",
         "operatorsAliases": false,

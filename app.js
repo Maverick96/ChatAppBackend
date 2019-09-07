@@ -31,6 +31,7 @@ const fetchMessages = require('./routes/fetchMessages');
 
 handleSockets(io);
 
+app.use(express.static('dist/chat-app-frontend' || ''));
 
 //routes
 app.post('/login', verifyUser);
@@ -38,6 +39,11 @@ app.post('/register', registerUser);
 app.get('/logout', verifyToken, logoutUser);
 app.get('/onlineUsers', verifyToken, fetchOnlineUsers);
 app.post('/fetchMessages', verifyToken, fetchMessages);
+
+app.get('*', function (req, res) {
+    console.log("SEND FILE!!");
+    res.sendFile(__dirname + '/dist/chat-app-frontend/index.html');
+});
 
 // Error Handler
 app.use(function (err, req, res, next) {
