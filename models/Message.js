@@ -28,7 +28,6 @@ module.exports = (sequelize, DataTypes) => {
         },
         sentiment: {
             type: DataTypes.STRING,
-            allowNull: false,
         },
     }, {});
     Message.associate = function (models) {

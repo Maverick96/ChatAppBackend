@@ -27,21 +27,17 @@ const registerUser = require('./routes/register');
 const logoutUser = require('./routes/logout')
 const fetchOnlineUsers = require('./routes/fetchOnlineUsers');
 const fetchMessages = require('./routes/fetchMessages');
-// const insert = require('./insert');
+
+
 handleSockets(io);
 
 
 //routes
-app.get('/', (req, res) => {
-    res.render('index.ejs');
-})
-
 app.post('/login', verifyUser);
 app.post('/register', registerUser);
 app.get('/logout', verifyToken, logoutUser);
 app.get('/onlineUsers', verifyToken, fetchOnlineUsers);
 app.post('/fetchMessages', verifyToken, fetchMessages);
-// app.get('/insert', insert);
 
 // Error Handler
 app.use(function (err, req, res, next) {

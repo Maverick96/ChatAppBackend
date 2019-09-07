@@ -10,11 +10,25 @@ function handleConnection(io) {
             console.log("REGI ", data);
             socket.userId = data.userId;
             socketMap[data.userId] = socket;
+        });
+
+        socket.on('peer-connection', data => {
+            console.log("Receiver key:", data.receiverId);
+            const receiverSocket = socketMap[data.receiverId];
+            if (receiverSocket) {
+                console.log("Socket present");
+                receiverSocket.emit('peer-key', data.key);
+            }
         })
 
         socket.on('message', function (data) {
             console.log("DATA!! ", data);
             console.log("SenderId", socket.userId)
+            // if the socket is lost, update it
+            if (!socket.userId) {
+                socket.userId = data.senderId;
+                socketMap[data.userId] = socket;
+            }
             const receiverSocket = socketMap[data.receiverId];
             const senderSocket = socketMap[data.senderId];
             // socket.userId = data.userId;
@@ -28,12 +42,14 @@ function handleConnection(io) {
                         senderId: data.senderId
                     };
                     // sent msg to client with sentiment
-                    senderSocket.emit(`message`, {
-                        msg: data.msg,
-                        sentiment: response.polarity,
-                        index: data.index,
-                        senderId: data.senderId
-                    });
+                    if (senderSocket) {
+                        senderSocket.emit(`message`, {
+                            message: data.msg,
+                            sentiment: response.polarity,
+                            index: data.index,
+                            senderId: data.senderId
+                        });
+                    }
                     // create entry in db
                     /*
                      TODO :
@@ -50,8 +66,9 @@ function handleConnection(io) {
                 })
             console.log("Receiver ", data.receiverId);
             // send to receiver user
-
-            receiverSocket.emit(`message`, { msg: data.msg, senderId: data.senderId });
+            if (receiverSocket) {
+                receiverSocket.emit(`message`, { message: data.msg, senderId: data.senderId });
+            }
 
         });
 
