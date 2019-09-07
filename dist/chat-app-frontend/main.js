@@ -1135,8 +1135,8 @@ var LoginService = /** @class */ (function () {
     LoginService.prototype.signUp = function (payload) {
         return this.http.post(src_app_app_constants__WEBPACK_IMPORTED_MODULE_2__["BASE_URL"] + "/register", payload);
     };
-    LoginService.prototype.logout = function (payload) {
-        return this.http.post(src_app_app_constants__WEBPACK_IMPORTED_MODULE_2__["BASE_URL"] + "/logout", payload);
+    LoginService.prototype.logout = function () {
+        return this.http.get(src_app_app_constants__WEBPACK_IMPORTED_MODULE_2__["BASE_URL"] + "/logout");
     };
     LoginService = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Injectable"])({
@@ -1361,7 +1361,7 @@ var VideoCallService = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = ".container{\n    width: 100%;\n    height: 100%;\n}\n\n.chat-list{\n    color: #0C61F2;\n    border-top: 1px solid grey;\n    background-color: white;\n}\n\n.selected-user{\n    color: white;\n    background-color: #0C61F2;\n}"
+module.exports = ".container{\n    width: 100%;\n    height: 100%;\n}\n\n.chat-list{\n    color: #0C61F2;\n    border-top: 1px solid grey;\n    background-color: white;\n}\n\n.selected-user{\n    color: white;\n    background-color: #0C61F2;\n}\n\n.footer{\n    display: flex;\n    position: fixed;\n    bottom: 0px;\n    width: 20vw;\n    height: 6vh;\n}\n\n.header{\n    display: flex;\n    position: fixed;\n    top: 0px;\n    width: 20vw;\n    height: 6vh;\n}\n\n.user-list{\n    max-height: 88vh;\n    overflow: scroll;\n}\n\nbutton{\n    width: 100%;\n    background-color: #0C61F2;\n    color: white;\n}\n\n.mat-list, .mat-nav-list, .mat-selection-list {\n    position: relative;\n    padding-top: 8px;\n    top: 6vh;\n}"
 
 /***/ }),
 
@@ -1372,7 +1372,7 @@ module.exports = ".container{\n    width: 100%;\n    height: 100%;\n}\n\n.chat-l
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"container p-0\">\n  <div layout=\"row\">\n    User List\n  </div>\n\n  <mat-list>\n    <mat-list-item *ngFor=\"let user of userList; let i = index\" (click)=\"onSelectUser(i)\" class=\"chat-list\"\n      [ngClass]=\"{ 'selected-user': selectedUserIndex === i}\">\n      {{user?.name}}\n    </mat-list-item>\n  </mat-list>\n\n</div>"
+module.exports = "<div class=\"container p-0\">\n  <div class=\"header\">\n    <button>User List</button>\n  </div>\n\n  <mat-list class=\"user-list\">\n    <mat-list-item *ngFor=\"let user of userList; let i = index\" (click)=\"onSelectUser(i)\" class=\"chat-list\"\n      [ngClass]=\"{ 'selected-user': selectedUserIndex === i}\">\n      {{user?.name}}\n    </mat-list-item>\n  </mat-list>\n\n  <div class=\"footer\">\n    <button (click)=\"logoutUser()\">Logout</button>\n  </div>\n\n</div>"
 
 /***/ }),
 
@@ -1388,6 +1388,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "UserListComponent", function() { return UserListComponent; });
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
 /* harmony import */ var _shared_services_user_service__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../shared/services/user.service */ "./src/app/shared/services/user.service.ts");
+/* harmony import */ var _shared_services_login_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../shared/services/login.service */ "./src/app/shared/services/login.service.ts");
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -1399,9 +1401,13 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 };
 
 
+
+
 var UserListComponent = /** @class */ (function () {
-    function UserListComponent(userService) {
+    function UserListComponent(userService, loginService, router) {
         this.userService = userService;
+        this.loginService = loginService;
+        this.router = router;
         this.userList = [];
         this.totalUsers = 0;
     }
@@ -1440,6 +1446,18 @@ var UserListComponent = /** @class */ (function () {
             console.log("CHAT ID", chatId);
         });
     };
+    UserListComponent.prototype.logoutUser = function () {
+        var _this = this;
+        this.logOut$ = this.loginService.logout().subscribe(function (res) {
+            if (res['success']) {
+                localStorage.clear();
+                _this.router.navigate(['login']);
+            }
+            else {
+                // show alert
+            }
+        });
+    };
     UserListComponent.prototype.ngOnDestroy = function () {
         if (this.userList$) {
             this.userList$.unsubscribe();
@@ -1454,7 +1472,9 @@ var UserListComponent = /** @class */ (function () {
             template: __webpack_require__(/*! ./user-list.component.html */ "./src/app/user-list/user-list.component.html"),
             styles: [__webpack_require__(/*! ./user-list.component.css */ "./src/app/user-list/user-list.component.css")]
         }),
-        __metadata("design:paramtypes", [_shared_services_user_service__WEBPACK_IMPORTED_MODULE_1__["UserService"]])
+        __metadata("design:paramtypes", [_shared_services_user_service__WEBPACK_IMPORTED_MODULE_1__["UserService"],
+            _shared_services_login_service__WEBPACK_IMPORTED_MODULE_2__["LoginService"],
+            _angular_router__WEBPACK_IMPORTED_MODULE_3__["Router"]])
     ], UserListComponent);
     return UserListComponent;
 }());
