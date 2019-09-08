@@ -73,7 +73,7 @@ var appRoutes = [
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = ""
+module.exports = ".app{\n    height: 100vh;\n    max-height: 100vh;\n    overflow: hidden;\n}"
 
 /***/ }),
 
@@ -84,7 +84,7 @@ module.exports = ""
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<!--The content below is only a placeholder and can be replaced.-->\n<div style=\"text-align:center\">\n  <app-loader></app-loader>\n  <router-outlet></router-outlet>\n</div>"
+module.exports = "<!--The content below is only a placeholder and can be replaced.-->\n<div style=\"text-align:center\" class=\"app\">\n  <app-loader></app-loader>\n  <router-outlet></router-outlet>\n</div>"
 
 /***/ }),
 
@@ -225,14 +225,19 @@ var AppModule = /** @class */ (function () {
                 _ctrl_ngx_emoji_mart__WEBPACK_IMPORTED_MODULE_14__["PickerModule"],
                 _ctrl_ngx_emoji_mart_ngx_emoji__WEBPACK_IMPORTED_MODULE_15__["EmojiModule"],
                 _angular_material__WEBPACK_IMPORTED_MODULE_16__["MatDialogModule"],
-                _angular_material__WEBPACK_IMPORTED_MODULE_16__["MatProgressSpinnerModule"]
+                _angular_material__WEBPACK_IMPORTED_MODULE_16__["MatProgressSpinnerModule"],
+                _angular_material__WEBPACK_IMPORTED_MODULE_16__["MatSnackBarModule"]
             ],
             providers: [{
                     provide: _angular_common_http__WEBPACK_IMPORTED_MODULE_8__["HTTP_INTERCEPTORS"],
                     useClass: _shared_services_http_interceptor_service__WEBPACK_IMPORTED_MODULE_13__["HttpInterceptorService"],
                     multi: true
                 },
-                { provide: _angular_material__WEBPACK_IMPORTED_MODULE_16__["MAT_DIALOG_DEFAULT_OPTIONS"], useValue: { hasBackdrop: false } }],
+                {
+                    provide: _angular_material__WEBPACK_IMPORTED_MODULE_16__["MAT_DIALOG_DEFAULT_OPTIONS"], useValue: { hasBackdrop: false }
+                },
+                { provide: _angular_material__WEBPACK_IMPORTED_MODULE_16__["MAT_SNACK_BAR_DEFAULT_OPTIONS"], useValue: { duration: 3500, horizontalPosition: 'center' } }
+            ],
             entryComponents: [_video_chat_box_video_chat_box_component__WEBPACK_IMPORTED_MODULE_17__["VideoChatBoxComponent"]],
             bootstrap: [_app_component__WEBPACK_IMPORTED_MODULE_2__["AppComponent"]]
         })
@@ -516,7 +521,7 @@ var LoaderComponent = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = ".container{\n    /* margin-top: 15vh; */\n    border: 1px solid black\n}\n\nlabel{\n    float: left;\n}\n\n.form-group{\n    margin-bottom: 10px;\n}"
+module.exports = ".container{\n    margin-top: 15vh;\n    border: 1px solid black;\n    background: linear-gradient(90deg, rgb(190, 230, 236), rgb(99, 195, 241));\n}\n\nlabel{\n    float: left;\n}\n\n.form-group{\n    margin-bottom: 10px;\n}"
 
 /***/ }),
 
@@ -527,7 +532,7 @@ module.exports = ".container{\n    /* margin-top: 15vh; */\n    border: 1px soli
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"container\">\n  <h5 class=\"card-title text-center\">Chatify</h5>\n  <form [formGroup]=\"loginForm\" (ngSubmit)=\"onSubmit()\" class=\"form-signin\">\n\n    <div *ngIf=\"!isLogin\" class=\"form-group\">\n      <label for=\"name\">Name :</label>\n      <input type=\"text\" formControlName=\"name\" id=\"name\" class=\"form-control\" placeholder=\"Name\">\n      <div *ngIf=\"loginForm.controls.name.invalid && loginForm.controls.name.touched\">Name is\n        required\n      </div>\n    </div>\n\n    <div *ngIf=\"!isLogin\" class=\"form-group\">\n      <label for=\"username\">Username :</label>\n      <input type=\"text\" formControlName=\"username\" id=\"username\" class=\"form-control\" placeholder=\"Username\">\n      <div *ngIf=\"loginForm.controls.username.invalid && loginForm.controls.username.touched\">Username is\n        required\n      </div>\n    </div>\n\n    <div class=\"form-group\">\n      <label for=\"inputEmail\">Email:</label>\n      <input type=\"email\" formControlName=\"email\" id=\"inputEmail\" class=\"form-control\" placeholder=\"Email address\"\n        autofocus>\n      <div *ngIf=\"loginForm.controls.email.invalid && loginForm.controls.email.touched\">Email is required</div>\n    </div>\n\n    <div class=\"form-group\">\n      <label for=\"inputPassword\">Password:</label>\n      <input type=\"password\" formControlName=\"password\" id=\"inputPassword\" class=\"form-control\" placeholder=\"Password\">\n      <div *ngIf=\"loginForm.controls.password.invalid && loginForm.controls.password.touched\">Password is\n        required\n      </div>\n    </div>\n\n    <div *ngIf=\"!isLogin\" class=\"form-group\">\n      <label for=\"inputCPassword\">Confirm Password:</label>\n      <input type=\"password\" formControlName=\"confirmPassword\" id=\"inputCPassword\" class=\"form-control\"\n        placeholder=\"Confirm Password\">\n      <div *ngIf=\"loginForm.controls.confirmPassword.invalid && loginForm.controls.confirmPassword.touched\">Confirm\n        Password is\n        required\n      </div>\n    </div>\n\n    <button *ngIf=\"isLogin\" class=\"btn btn-lg btn-primary btn-block text-uppercase\" type=\"button\"\n      (click)=\"redirectTo('sign-up')\">Sign Up</button>\n\n    <button *ngIf=\"!isLogin\" class=\"btn btn-lg btn-primary btn-block text-uppercase\" type=\"button\"\n      (click)=\"redirectTo('login')\">Login</button>\n\n    <button class=\"btn btn-lg btn-primary btn-block text-uppercase\" [disabled]=\"loginForm.invalid\" type=\"submit\">\n      {{buttonText}}\n    </button>\n    <hr class=\"my-4\">\n  </form>\n</div>"
+module.exports = "<div class=\"container\">\n  <h5 class=\"card-title text-center\">Chatify</h5>\n  <form [formGroup]=\"loginForm\" (ngSubmit)=\"onSubmit()\" class=\"form-signin\">\n\n    <div *ngIf=\"!isLogin\" class=\"form-group\">\n      <label for=\"name\">Name :</label>\n      <input type=\"text\" formControlName=\"name\" id=\"name\" class=\"form-control\" placeholder=\"Name\">\n      <div *ngIf=\"loginForm.controls.name.invalid && loginForm.controls.name.touched\">Name is\n        required\n      </div>\n    </div>\n\n    <div *ngIf=\"!isLogin\" class=\"form-group\">\n      <label for=\"username\">Username :</label>\n      <input type=\"text\" formControlName=\"username\" id=\"username\" class=\"form-control\" placeholder=\"Username\">\n      <div *ngIf=\"loginForm.controls.username.invalid && loginForm.controls.username.touched\">Username is\n        required\n      </div>\n    </div>\n\n    <div class=\"form-group\">\n      <label for=\"inputEmail\">Email:</label>\n      <input type=\"email\" formControlName=\"email\" id=\"inputEmail\" class=\"form-control\" placeholder=\"Email address\"\n        autofocus>\n      <div *ngIf=\"loginForm.controls.email.invalid && loginForm.controls.email.touched\">Email is required</div>\n    </div>\n\n    <div class=\"form-group\">\n      <label for=\"inputPassword\">Password:</label>\n      <input type=\"password\" formControlName=\"password\" id=\"inputPassword\" class=\"form-control\" placeholder=\"Password\">\n      <div *ngIf=\"loginForm.controls.password.invalid && loginForm.controls.password.touched\">Password is\n        required\n      </div>\n    </div>\n\n    <div *ngIf=\"!isLogin\" class=\"form-group\">\n      <label for=\"inputCPassword\">Confirm Password:</label>\n      <input type=\"password\" formControlName=\"confirmPassword\" id=\"inputCPassword\" class=\"form-control\"\n        placeholder=\"Confirm Password\">\n      <div *ngIf=\"loginForm.controls.confirmPassword.invalid && loginForm.controls.confirmPassword.touched\">Confirm\n        Password is\n        required\n      </div>\n    </div>\n\n    <div class=\"row justify-content-center\">\n      <button mat-button class=\"w-50 primary-blue\" [disabled]=\"loginForm.invalid\" type=\"submit\">\n        {{buttonText}}\n      </button>\n\n    </div>\n\n    <!-- <button mat-button color=\"primary\">Primary</button> -->\n    <div class=\"row justify-content-center\">\n\n      <button *ngIf=\"isLogin\" mat-button color=\"accent\" class=\"my-3 w-50 pointer\" type=\"button\"\n        (click)=\"redirectTo('sign-up')\">\n        Don't have an account? Sign Up</button>\n\n      <button *ngIf=\"!isLogin\" mat-button color=\"accent\" class=\"my-3 w-50\" type=\"button\"\n        (click)=\"redirectTo('login')\">Already have an account? Sign In</button>\n    </div>\n    <hr class=\"my-4\">\n  </form>\n</div>"
 
 /***/ }),
 
@@ -545,6 +550,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/forms */ "./node_modules/@angular/forms/fesm5/forms.js");
 /* harmony import */ var _shared_services_login_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../shared/services/login.service */ "./src/app/shared/services/login.service.ts");
 /* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
+/* harmony import */ var _shared_services_alert_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../shared/services/alert.service */ "./src/app/shared/services/alert.service.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -558,11 +564,13 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 
 
 
+
 var LoginComponent = /** @class */ (function () {
-    function LoginComponent(fb, loginService, router) {
+    function LoginComponent(fb, loginService, router, alertService) {
         this.fb = fb;
         this.loginService = loginService;
         this.router = router;
+        this.alertService = alertService;
         this.isLogin = false;
         this.isPasswordSame = false;
         this.buttonText = 'Sign In';
@@ -607,22 +615,15 @@ var LoginComponent = /** @class */ (function () {
         if (this.loginForm.valid) {
             this.login$ = this.loginService.login(this.loginForm.value).subscribe(function (res) {
                 if (res['success']) {
-                    // this.toastrService.success("Login Success", '', {
-                    //   timeOut: 2000
-                    // });
                     localStorage.setItem('user-data', JSON.stringify(res['data']));
                     localStorage.setItem('token', res['token']);
                     _this.router.navigate(['home']);
                 }
                 else {
-                    // this.toastrService.error("Login Failed", '', {
-                    //   timeOut: 5000
-                    // });
+                    _this.alertService.showAlert("Login Failed");
                 }
             }, function (err) {
-                // this.toastrService.error("Login Failed", '', {
-                //   timeOut: 5000
-                // });
+                _this.alertService.showAlert("Login Failed");
                 console.error(err);
             });
         }
@@ -633,20 +634,14 @@ var LoginComponent = /** @class */ (function () {
         if (this.loginForm.valid && this.isPasswordSame) {
             this.login$ = this.loginService.signUp(this.loginForm.value).subscribe(function (res) {
                 if (res['success']) {
-                    // this.toastrService.success("Login Success", '', {
-                    //   timeOut: 2000
-                    // });
                     _this.router.navigate(['login']);
+                    _this.alertService.showAlert("Sign Up Successful");
                 }
                 else {
-                    // this.toastrService.error("Login Failed", '', {
-                    //   timeOut: 5000
-                    // });
+                    _this.alertService.showAlert("Sign Up Failed");
                 }
             }, function (err) {
-                // this.toastrService.error("Login Failed", '', {
-                //   timeOut: 5000
-                // });
+                _this.alertService.showAlert(err['error']['error']['message']);
                 console.error(err);
             });
         }
@@ -667,7 +662,8 @@ var LoginComponent = /** @class */ (function () {
         }),
         __metadata("design:paramtypes", [_angular_forms__WEBPACK_IMPORTED_MODULE_1__["FormBuilder"],
             _shared_services_login_service__WEBPACK_IMPORTED_MODULE_2__["LoginService"],
-            _angular_router__WEBPACK_IMPORTED_MODULE_3__["Router"]])
+            _angular_router__WEBPACK_IMPORTED_MODULE_3__["Router"],
+            _shared_services_alert_service__WEBPACK_IMPORTED_MODULE_4__["AlertService"]])
     ], LoginComponent);
     return LoginComponent;
 }());
@@ -683,7 +679,7 @@ var LoginComponent = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = ".sentText{\n    /* background-color: beige; */\n    /* justify-content: flex-end; */\n    background-color: #0C61F2;\n    color: whitesmoke;\n    float: right;\n}\n\n.receivedText{\n    background-color: white;\n    /* justify-content: flex-start; */\n    float: left;\n}\n\n.text-box{\n    display: flex;\n    position: fixed;\n    bottom: 3px;\n    width: 100%;\n    height: 7vh;\n}\n\ntextarea{\n    width: 72%;\n}\n\nbutton{\n    width: 6%;\n}\n\n.chat-area{\n    width: 100%;\n    height: 100%;\n    background-color: #d4d0d2;\n}\n\nmat-list-item{\n    border: 1px solid;\n    margin: 5px;\n}\n\n.emotion{\n    display: inline-block;\n    float: right;\n    position: relative;\n    bottom: -14px;\n    margin-right: 4px;\n    color: #0C61F2;\n}\n\n.text{\n    /* display: flex; */\n    /* border: 1px solid white; */\n    margin: 8px;\n    padding: 8px 16px;\n    border-radius: 5%;\n}\n\n.chat-body{\n    display: flex;\n    flex-direction: column;\n    max-height: 88vh;\n    overflow: scroll;\n}\n\n.chat-header{\n    height: 5vh;\n    background-color: #0C61F2;\n    color: white;\n    display: flex;\n    justify-content: center;\n    align-items: center;\n}\n\n.emoji-container{\n    position: relative;\n    left: -22vw;\n    bottom: 44vh;\n}\n\n.emoji-icon{\n    position: relative;\n    bottom: -20px;\n}"
+module.exports = ".sentText{\n    /* background-color: beige; */\n    /* justify-content: flex-end; */\n    background-color: #0C61F2;\n    color: whitesmoke;\n    float: right;\n}\n\n.receivedText{\n    background-color: white;\n    /* justify-content: flex-start; */\n    float: left;\n}\n\n.text-box{\n    display: flex;\n    position: relative;\n    width: 100%;\n    height: 7vh;\n}\n\ntextarea{\n    flex: 1;\n}\n\n.chat-area{\n    width: 100%;\n    height: 100vh;\n    background: linear-gradient(90deg, rgb(190, 230, 236), rgb(99, 195, 241));\n}\n\nmat-list-item{\n    border: 1px solid;\n    margin: 5px;\n}\n\n.emotion{\n    display: inline-block;\n    /* float: right; */\n    position: relative;\n    bottom: -14px;\n    margin-right: 4px;\n    color: #0C61F2;\n}\n\n.text{\n    /* display: flex; */\n    /* border: 1px solid white; */\n    margin: 8px;\n    padding: 8px 16px;\n    border-radius: 5%;\n}\n\n.chat-body{\n    display: flex;\n    flex-direction: column;\n    max-height: 88vh;\n    overflow: scroll;\n    height: 88vh;\n}\n\n.chat-header{\n    height: 5vh;\n    background-color: #0C61F2;\n    color: white;\n    display: flex;\n    justify-content: center;\n    align-items: center;\n}\n\n.emoji-container{\n    position: absolute;\n    bottom: 7vh;\n}\n\n.emoji-icon{\n    position: relative;\n    bottom: -20px;\n}\n\n.no-user{\n    width: 100%;\n    height: 100vh;\n    background:linear-gradient(90deg, rgb(190, 230, 236), rgb(99, 195, 241));\n}\n\n.disable-button{\n    background-color: #dededc !important;\n}"
 
 /***/ }),
 
@@ -694,7 +690,7 @@ module.exports = ".sentText{\n    /* background-color: beige; */\n    /* justify
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"chat-area\" *ngIf=\"receiverUser['userId']\">\n    <!-- <mat-list>\n        <mat-list-item *ngFor=\"let message of messageList; let i = index\"\n            [ngClass]=\"{ sentText: message.senderId === currentUserId, receivedText: message.senderId !== currentUserId}\"\n            (click)=\"onSelectUser(i)\">\n            {{message?.message}}\n        </mat-list-item>\n    </mat-list> -->\n\n    <div class=\"chat-header\">\n        <div class=\"mr-3\">\n            {{receiverUser['name']}}\n        </div>\n        <mat-icon (click)=\"initiateVideoCall()\" matListIcon>videocam</mat-icon>\n    </div>\n\n\n    <input #inp type=\"file\" style=\"display: none\" />\n\n    <div #chatBody class=\"chat-body\">\n        <div *ngFor=\"let message of messageList; let i = index\">\n\n            <div class=\"text\"\n                [ngClass]=\"{ sentText: message.senderId === currentUserId, receivedText: message.senderId !== currentUserId}\">\n                {{message.message}}\n\n            </div>\n\n\n            <div class=\"emotion\">\n                <ngx-emoji *ngIf=\"message.sentiment == 'positive'\" [emoji]=\"{ id: 'grin'}\" size=\"20\"></ngx-emoji>\n                <!-- <span *ngIf=\"message.sentiment == 'positive'\">\n                    :)\n                </span> -->\n                <ngx-emoji *ngIf=\"message.sentiment == 'negative'\" [emoji]=\"{ id: 'slightly_frowning_face'}\" size=\"20\">\n                </ngx-emoji>\n                <!-- <span *ngIf=\"message.sentiment == 'negative'\">\n                    :(\n                </span> -->\n                <ngx-emoji *ngIf=\"message.sentiment == 'neutral'\" [emoji]=\"{ id: 'neutral_face'}\" size=\"20\">\n                </ngx-emoji>\n                <!-- <span *ngIf=\"message.sentiment == 'neutral'\">\n                    :|\n                </span> -->\n            </div>\n        </div>\n\n    </div>\n\n\n    <div class=\"text-box\">\n        <mat-icon class=\"emoji-icon\" (click)=\"toggleEmojiLayout()\" matListIcon>tag_faces</mat-icon>\n        <textarea #textInp [(ngModel)]=\"message\">\n        </textarea>\n\n        <button mat-raised-button [ngClass]=\"{'primary-blue': message.length > 0}\" [disabled]=\"message.length === 0\"\n            (click)=\"onEnterMessage()\">Send</button>\n\n        <div *ngIf=\"showEmoji\" class=\"emoji-container\">\n\n            <emoji-mart (emojiClick)=\"addEmoji($event)\"></emoji-mart>\n        </div>\n    </div>\n\n</div>"
+module.exports = "<div class=\"chat-area\" *ngIf=\"receiverUser['userId']; else noUser\">\n    <!-- <mat-list>\n        <mat-list-item *ngFor=\"let message of messageList; let i = index\"\n            [ngClass]=\"{ sentText: message.senderId === currentUserId, receivedText: message.senderId !== currentUserId}\"\n            (click)=\"onSelectUser(i)\">\n            {{message?.message}}\n        </mat-list-item>\n    </mat-list> -->\n\n    <div class=\"chat-header\">\n        <div class=\"mr-3\">\n            {{receiverUser['name']}}\n        </div>\n        <mat-icon (click)=\"initiateVideoCall()\" matListIcon>videocam</mat-icon>\n    </div>\n\n\n    <input #inp type=\"file\" style=\"display: none\" />\n\n    <div #chatBody class=\"chat-body\">\n        <div *ngFor=\"let message of messageList; let i = index\">\n\n            <div class=\"text\"\n                [ngClass]=\"{ sentText: message.senderId === currentUserId, receivedText: message.senderId !== currentUserId}\">\n                {{message.message}}\n\n            </div>\n\n\n            <div class=\"emotion\"\n                [ngClass]=\"{'float-right': message.senderId === currentUserId, 'float-left': message.senderId !== currentUserId}\">\n                <ngx-emoji *ngIf=\"message.sentiment == 'positive'\" [emoji]=\"{ id: 'grin'}\" size=\"20\"></ngx-emoji>\n                <!-- <span *ngIf=\"message.sentiment == 'positive'\">\n                    :)\n                </span> -->\n                <ngx-emoji *ngIf=\"message.sentiment == 'negative'\" [emoji]=\"{ id: 'slightly_frowning_face'}\" size=\"20\">\n                </ngx-emoji>\n                <!-- <span *ngIf=\"message.sentiment == 'negative'\">\n                    :(\n                </span> -->\n                <ngx-emoji *ngIf=\"message.sentiment == 'neutral'\" [emoji]=\"{ id: 'neutral_face'}\" size=\"20\">\n                </ngx-emoji>\n                <!-- <span *ngIf=\"message.sentiment == 'neutral'\">\n                    :|\n                </span> -->\n            </div>\n        </div>\n\n    </div>\n\n\n    <div class=\"text-box\">\n        <mat-icon class=\"emoji-icon pointer\" (click)=\"toggleEmojiLayout()\" matListIcon>tag_faces</mat-icon>\n        <textarea #textInp [(ngModel)]=\"message\">\n        </textarea>\n\n        <button mat-raised-button\n            [ngClass]=\"{'primary-blue': message.length > 0, 'disable-button': message.length === 0}\"\n            [disabled]=\"message.length === 0\" (click)=\"onEnterMessage()\">Send</button>\n\n        <div *ngIf=\"showEmoji\" class=\"emoji-container\">\n\n            <emoji-mart (emojiClick)=\"addEmoji($event)\"></emoji-mart>\n        </div>\n    </div>\n\n</div>\n\n<ng-template #noUser>\n    <div class=\"no-user\"></div>\n</ng-template>"
 
 /***/ }),
 
@@ -712,6 +708,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _shared_services_user_service__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../shared/services/user.service */ "./src/app/shared/services/user.service.ts");
 /* harmony import */ var _shared_services_messaging_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../shared/services/messaging.service */ "./src/app/shared/services/messaging.service.ts");
 /* harmony import */ var _shared_services_video_call_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../shared/services/video-call.service */ "./src/app/shared/services/video-call.service.ts");
+/* harmony import */ var _shared_services_alert_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../shared/services/alert.service */ "./src/app/shared/services/alert.service.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -725,12 +722,14 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 
 
 
+
 // import { Peer } from 'simple-peer';
 var MessageBoxComponent = /** @class */ (function () {
-    function MessageBoxComponent(userService, messagingService, videoCallService) {
+    function MessageBoxComponent(userService, messagingService, videoCallService, alertService) {
         this.userService = userService;
         this.messagingService = messagingService;
         this.videoCallService = videoCallService;
+        this.alertService = alertService;
         this.message = '';
         this.messageList = [];
         this.receiverUser = {};
@@ -762,6 +761,7 @@ var MessageBoxComponent = /** @class */ (function () {
                 _this.scrollToBottom();
             }, function (err) {
                 console.error(err);
+                _this.alertService.showAlert("Message could not be fetched!");
                 _this.chatId = null;
                 _this.messageList = [];
             });
@@ -796,7 +796,7 @@ var MessageBoxComponent = /** @class */ (function () {
             if (msg && msg.sentiment) {
                 _this.messageList[msg.index]['sentiment'] = msg.sentiment;
             }
-            else {
+            else if (msg['senderId'] === _this.receiverUser['userId']) { // push msg only if you're in the receiver's chat window
                 _this.messageList.push(msg);
             }
             _this.scrollToBottom();
@@ -851,7 +851,8 @@ var MessageBoxComponent = /** @class */ (function () {
         }),
         __metadata("design:paramtypes", [_shared_services_user_service__WEBPACK_IMPORTED_MODULE_1__["UserService"],
             _shared_services_messaging_service__WEBPACK_IMPORTED_MODULE_2__["MessagingService"],
-            _shared_services_video_call_service__WEBPACK_IMPORTED_MODULE_3__["VideoCallService"]])
+            _shared_services_video_call_service__WEBPACK_IMPORTED_MODULE_3__["VideoCallService"],
+            _shared_services_alert_service__WEBPACK_IMPORTED_MODULE_4__["AlertService"]])
     ], MessageBoxComponent);
     return MessageBoxComponent;
 }());
@@ -917,6 +918,49 @@ var PageNotFoundComponent = /** @class */ (function () {
         __metadata("design:paramtypes", [])
     ], PageNotFoundComponent);
     return PageNotFoundComponent;
+}());
+
+
+
+/***/ }),
+
+/***/ "./src/app/shared/services/alert.service.ts":
+/*!**************************************************!*\
+  !*** ./src/app/shared/services/alert.service.ts ***!
+  \**************************************************/
+/*! exports provided: AlertService */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "AlertService", function() { return AlertService; });
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var _angular_material__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/material */ "./node_modules/@angular/material/esm5/material.es5.js");
+var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (undefined && undefined.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+var AlertService = /** @class */ (function () {
+    function AlertService(snackService) {
+        this.snackService = snackService;
+    }
+    AlertService.prototype.showAlert = function (msg) {
+        this.snackService.open(msg);
+    };
+    AlertService = __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Injectable"])({
+            providedIn: 'root'
+        }),
+        __metadata("design:paramtypes", [_angular_material__WEBPACK_IMPORTED_MODULE_1__["MatSnackBar"]])
+    ], AlertService);
+    return AlertService;
 }());
 
 
@@ -1011,7 +1055,6 @@ var HttpInterceptorService = /** @class */ (function () {
     HttpInterceptorService.prototype.intercept = function (request, next) {
         var _this = this;
         var token = localStorage.getItem('token');
-        console.log("TOKEN ", token);
         if (token) {
             request = request.clone({
                 setHeaders: {
@@ -1031,7 +1074,6 @@ var HttpInterceptorService = /** @class */ (function () {
             }
             return event;
         }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["catchError"])(function (error) {
-            console.log("error", error);
             if (error.status === 403) {
                 localStorage.clear();
                 _this.router.navigate(['login']);
@@ -1362,7 +1404,7 @@ var VideoCallService = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = ".container{\n    width: 100%;\n    height: 100%;\n}\n\n.chat-list{\n    color: #0C61F2;\n    border-top: 1px solid grey;\n    background-color: white;\n}\n\n.selected-user{\n    color: white;\n    background-color: #0C61F2;\n}\n\n.footer{\n    display: flex;\n    position: fixed;\n    bottom: 0px;\n    width: 20vw;\n    height: 6vh;\n}\n\n.header{\n    display: flex;\n    position: fixed;\n    top: 0px;\n    width: 20vw;\n    height: 6vh;\n}\n\n.user-list{\n    max-height: 88vh;\n    overflow: scroll;\n}\n\nbutton{\n    width: 100%;\n    background-color: #0C61F2;\n    color: white;\n}\n\n.mat-list, .mat-nav-list, .mat-selection-list {\n    position: relative;\n    padding-top: 8px;\n    top: 6vh;\n}"
+module.exports = ".container{\n    width: 100%;\n    height: 100%;\n    background: linear-gradient(180deg,  rgb(190, 230, 236), rgb(99, 195, 241));\n}\n\n.chat-list{\n    color: #0C61F2;\n    border-top: 1px solid grey;\n    /* background-color: white; */\n}\n\n.selected-user{\n    color: white;\n    background-color: #0C61F2;\n}\n\n.footer{\n    display: flex;\n    position: fixed;\n    bottom: 0px;\n    width: 20vw;\n    height: 6vh;\n}\n\n.header{\n    display: flex;\n    position: fixed;\n    top: 0px;\n    width: 20vw;\n    height: 6vh;\n}\n\n.user-list{\n    max-height: 88vh;\n    overflow: scroll;\n}\n\nbutton{\n    width: 100%;\n    background-color: #0C61F2;\n    color: white;\n}\n\n.mat-list, .mat-nav-list, .mat-selection-list {\n    position: relative;\n    padding-top: 8px;\n    top: 6vh;\n}"
 
 /***/ }),
 
@@ -1373,7 +1415,7 @@ module.exports = ".container{\n    width: 100%;\n    height: 100%;\n}\n\n.chat-l
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"container p-0\">\n  <div class=\"header\">\n    <button>User List</button>\n  </div>\n\n  <mat-list class=\"user-list\">\n    <mat-list-item *ngFor=\"let user of userList; let i = index\" (click)=\"onSelectUser(i)\" class=\"chat-list\"\n      [ngClass]=\"{ 'selected-user': selectedUserIndex === i}\">\n      {{user?.name}}\n    </mat-list-item>\n  </mat-list>\n\n  <div class=\"footer\">\n    <button (click)=\"logoutUser()\">Logout</button>\n  </div>\n\n</div>"
+module.exports = "<div class=\"container p-0\">\n  <div class=\"header\">\n    <button>User List</button>\n  </div>\n\n  <mat-list class=\"user-list\">\n    <mat-list-item *ngFor=\"let user of userList; let i = index\" (click)=\"onSelectUser(i)\" class=\"chat-list pointer\"\n      [ngClass]=\"{ 'selected-user': selectedUserIndex === i}\">\n      {{user?.name}}\n      <span class=\"green-dot\"></span>\n    </mat-list-item>\n    <mat-list-item *ngIf=\"userList.length === 0\" class=\"selected-user justify-content-center\">\n      No Users Online\n    </mat-list-item>\n  </mat-list>\n\n  <div class=\"footer\">\n    <button (click)=\"logoutUser()\">Logout</button>\n  </div>\n\n</div>"
 
 /***/ }),
 
@@ -1391,6 +1433,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _shared_services_user_service__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../shared/services/user.service */ "./src/app/shared/services/user.service.ts");
 /* harmony import */ var _shared_services_login_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../shared/services/login.service */ "./src/app/shared/services/login.service.ts");
 /* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
+/* harmony import */ var _shared_services_alert_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../shared/services/alert.service */ "./src/app/shared/services/alert.service.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -1404,16 +1447,17 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 
 
 
+
 var UserListComponent = /** @class */ (function () {
-    function UserListComponent(userService, loginService, router) {
+    function UserListComponent(userService, loginService, router, alertService) {
         this.userService = userService;
         this.loginService = loginService;
         this.router = router;
+        this.alertService = alertService;
         this.userList = [];
         this.totalUsers = 0;
     }
     UserListComponent.prototype.ngOnInit = function () {
-        console.log("USer List");
         this.fetchUserList();
         this.getUserChatId();
     };
@@ -1426,11 +1470,9 @@ var UserListComponent = /** @class */ (function () {
                 _this.totalUsers = data['total'];
             }
         }, function (err) {
+            _this.alertService.showAlert("User list could not be fetched!");
             console.log("Error", err);
         });
-    };
-    UserListComponent.prototype.videoCall = function () {
-        console.log("Video Call!");
     };
     UserListComponent.prototype.onSelectUser = function (index) {
         if (this.selectedUserIndex === index) {
@@ -1456,7 +1498,10 @@ var UserListComponent = /** @class */ (function () {
             }
             else {
                 // show alert
+                _this.alertService.showAlert("Logout failed");
             }
+        }, function (err) {
+            _this.alertService.showAlert("Logout failed");
         });
     };
     UserListComponent.prototype.ngOnDestroy = function () {
@@ -1475,7 +1520,8 @@ var UserListComponent = /** @class */ (function () {
         }),
         __metadata("design:paramtypes", [_shared_services_user_service__WEBPACK_IMPORTED_MODULE_1__["UserService"],
             _shared_services_login_service__WEBPACK_IMPORTED_MODULE_2__["LoginService"],
-            _angular_router__WEBPACK_IMPORTED_MODULE_3__["Router"]])
+            _angular_router__WEBPACK_IMPORTED_MODULE_3__["Router"],
+            _shared_services_alert_service__WEBPACK_IMPORTED_MODULE_4__["AlertService"]])
     ], UserListComponent);
     return UserListComponent;
 }());
