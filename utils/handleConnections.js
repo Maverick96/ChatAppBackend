@@ -50,6 +50,11 @@ function handleConnection(io) {
                             senderId: data.senderId
                         });
                     }
+                    console.log("Receiver ", data.receiverId);
+                    // send to receiver user
+                    if (receiverSocket) {
+                        receiverSocket.emit(`message`, { message: data.msg, senderId: data.senderId });
+                    }
                     // create entry in db
                     /*
                      TODO :
@@ -64,11 +69,7 @@ function handleConnection(io) {
                 .catch(err => {
                     console.error(err);
                 })
-            console.log("Receiver ", data.receiverId);
-            // send to receiver user
-            if (receiverSocket) {
-                receiverSocket.emit(`message`, { message: data.msg, senderId: data.senderId });
-            }
+
 
         });
 
