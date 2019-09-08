@@ -256,7 +256,7 @@ var AppModule = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = ".home{\n    width: 100vw;\n    height: 100vh;\n}\n\n.mat-drawer-container{\n    height: 100%;\n}\n\n.mat-drawer{\n    width: 20vw\n}\n\n.row{\n    margin: 0;\n}\n\n.chat-body{\n    height: 95vh;\n    /* width: 75vw; */\n}\n\n.menu{\n    height: 5vh;\n    align-items: center;\n    background-color: lightblue;\n    display: flex;\n    justify-content: center;\n    position: absolute;\n    z-index: 10;\n}\n\n.accept-call{\n    background-color: #286d28;\n    color: white;\n}\n\n.decline-call{\n    background-color: darkred;\n    color: white;\n}"
+module.exports = ".home{\n    width: 100vw;\n    height: 100vh;\n}\n\n.mat-drawer-container{\n    height: 100%;\n}\n\n.mat-drawer{\n    width: 20vw\n}\n\n.row{\n    margin: 0;\n}\n\n.chat-body{\n    height: 95vh;\n    /* width: 75vw; */\n}\n\n.caller-info{\n    height: 5vh;\n    align-items: center;\n    background-color: lightblue;\n    display: flex;\n    justify-content: center;\n    position: absolute;\n    right: 28vw;\n}\n\n.accept-call{\n    background-color: #286d28;\n    color: white;\n}\n\n.decline-call{\n    background-color: darkred;\n    color: white;\n}"
 
 /***/ }),
 
@@ -267,7 +267,7 @@ module.exports = ".home{\n    width: 100vw;\n    height: 100vh;\n}\n\n.mat-drawe
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<!-- <div class=\"row\">\n\n  <div class=\"col-4\">\n    <app-user-list></app-user-list>\n  </div>\n  <div class=\"col-8\">\n    <app-message-box></app-message-box>\n  </div>\n\n</div> -->\n<div class=\"home\">\n  <mat-drawer-container class=\"example-container\" autosize>\n    <mat-drawer #drawer class=\"example-sidenav\" mode=\"side\">\n\n      <app-user-list></app-user-list>\n    </mat-drawer>\n\n    <audio #callerTune src=\"../../assets/audio/hangouts_call.mp3\" loop></audio>\n\n    <div *ngIf=\"isIncomingCall\" class=\"menu\">\n      <button type=\"button\" mat-button class=\"accept-call mr-3\" (click)=\"acceptCall()\">\n        Accept\n      </button>\n      <div class=\"caller-name\">\n        {{caller}}\n      </div>\n      <button type=\"button\" mat-button class=\"decline-call ml-3\" (click)=\"declineCall()\">\n        Decline\n      </button>\n    </div>\n    <div class=\"chat-body\">\n      <app-message-box class=\"w-100\"></app-message-box>\n    </div>\n\n  </mat-drawer-container>\n</div>"
+module.exports = "<!-- <div class=\"row\">\n\n  <div class=\"col-4\">\n    <app-user-list></app-user-list>\n  </div>\n  <div class=\"col-8\">\n    <app-message-box></app-message-box>\n  </div>\n\n</div> -->\n<div class=\"home\">\n  <mat-drawer-container class=\"example-container\" autosize>\n    <mat-drawer #drawer class=\"example-sidenav\" mode=\"side\">\n\n      <app-user-list></app-user-list>\n    </mat-drawer>\n\n    <audio #callerTune src=\"../../assets/audio/hangouts_call.mp3\" loop></audio>\n\n    <div *ngIf=\"isIncomingCall\" class=\"caller-info\">\n      <button type=\"button\" mat-button class=\"accept-call mx-3\" (click)=\"acceptCall()\">\n        Accept\n      </button>\n      <div class=\"caller-name\">\n        {{caller}}\n      </div>\n      <button type=\"button\" mat-button class=\"decline-call mx-3\" (click)=\"declineCall()\">\n        Decline\n      </button>\n    </div>\n    <div class=\"chat-body\">\n      <app-message-box class=\"w-100\"></app-message-box>\n    </div>\n\n  </mat-drawer-container>\n</div>"
 
 /***/ }),
 
@@ -308,7 +308,7 @@ var HomeComponent = /** @class */ (function () {
         this.isIncomingCall = false;
         var userData = JSON.parse(localStorage.getItem('user-data'));
         if (userData) {
-            this.caller = userData['name'];
+            this.currentUserName = this.caller = userData['name'];
         }
         console.log("CAller!", this.caller);
     }
@@ -350,6 +350,7 @@ var HomeComponent = /** @class */ (function () {
             //open dialog here for initiator
             console.log("User Data", userData);
             if (userData['receiverId'] && userData['senderId']) {
+                _this.caller = _this.currentUserName;
                 var data = {
                     key: undefined,
                     isInitiator: true,
@@ -358,6 +359,7 @@ var HomeComponent = /** @class */ (function () {
                     caller: _this.caller
                 };
                 _this.openVideoBox(data);
+                _this.playCallerTune();
             }
         });
     };
@@ -371,7 +373,7 @@ var HomeComponent = /** @class */ (function () {
                 _this.isIncomingCall = true;
                 initData['isInitiator'] = false;
                 _this.initData = initData;
-                _this.callerTune.nativeElement.play();
+                _this.playCallerTune();
             }
         });
     };
@@ -384,6 +386,7 @@ var HomeComponent = /** @class */ (function () {
             }
             else if (data['isInitiator'] === false) {
                 _this.videoCallService.setReceiverData(data);
+                _this.stopCallerTune();
             }
         });
     };
@@ -391,9 +394,11 @@ var HomeComponent = /** @class */ (function () {
         this.stopCallerTune();
         this.initData = {};
         this.isIncomingCall = false;
-        this.caller = '';
         this.videoCallService.setSelectedUser({});
         this.videoCallService.setInitiatorData({});
+    };
+    HomeComponent.prototype.playCallerTune = function () {
+        this.callerTune.nativeElement.play();
     };
     HomeComponent.prototype.stopCallerTune = function () {
         this.callerTune.nativeElement.pause();
