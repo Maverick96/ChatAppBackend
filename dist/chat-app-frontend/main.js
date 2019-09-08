@@ -679,7 +679,7 @@ var LoginComponent = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = ".sentText{\n    /* background-color: beige; */\n    /* justify-content: flex-end; */\n    background-color: #0C61F2;\n    color: whitesmoke;\n    float: right;\n}\n\n.receivedText{\n    background-color: white;\n    /* justify-content: flex-start; */\n    float: left;\n}\n\n.text-box{\n    display: flex;\n    position: relative;\n    width: 100%;\n    height: 7vh;\n}\n\ntextarea{\n    flex: 1;\n}\n\n.chat-area{\n    width: 100%;\n    height: 100vh;\n    background: linear-gradient(90deg, rgb(190, 230, 236), rgb(99, 195, 241));\n}\n\nmat-list-item{\n    border: 1px solid;\n    margin: 5px;\n}\n\n.emotion{\n    display: inline-block;\n    /* float: right; */\n    position: relative;\n    bottom: -14px;\n    margin-right: 4px;\n    color: #0C61F2;\n}\n\n.text{\n    /* display: flex; */\n    /* border: 1px solid white; */\n    margin: 8px;\n    padding: 8px 16px;\n    border-radius: 5%;\n}\n\n.chat-body{\n    display: flex;\n    flex-direction: column;\n    max-height: 88vh;\n    overflow: scroll;\n    height: 88vh;\n}\n\n.chat-header{\n    height: 5vh;\n    background-color: #0C61F2;\n    color: white;\n    display: flex;\n    justify-content: center;\n    align-items: center;\n}\n\n.emoji-container{\n    position: absolute;\n    bottom: 7vh;\n}\n\n.emoji-icon{\n    position: relative;\n    bottom: -20px;\n}\n\n.no-user{\n    width: 100%;\n    height: 100vh;\n    background:linear-gradient(90deg, rgb(190, 230, 236), rgb(99, 195, 241));\n}\n\n.disable-button{\n    background-color: #dededc !important;\n}"
+module.exports = ".sentText{\n    /* background-color: beige; */\n    /* justify-content: flex-end; */\n    background-color: #0C61F2;\n    color: whitesmoke;\n    float: right;\n}\n\n.receivedText{\n    background-color: white;\n    /* justify-content: flex-start; */\n    float: left;\n}\n\n.text-box{\n    display: flex;\n    position: relative;\n    width: 100%;\n    height: 7vh;\n}\n\ntextarea{\n    flex: 1;\n}\n\n.chat-area{\n    width: 100%;\n    height: 100vh;\n    background: linear-gradient(90deg, rgb(190, 230, 236), rgb(99, 195, 241));\n}\n\nmat-list-item{\n    border: 1px solid;\n    margin: 5px;\n}\n\n.emotion{\n    display: inline-block;\n    /* float: right; */\n    position: relative;\n    bottom: -14px;\n    margin-right: 4px;\n    color: #0C61F2;\n}\n\n.text{\n    /* display: flex; */\n    /* border: 1px solid white; */\n    margin: 8px;\n    padding: 8px 16px;\n    border-radius: 5%;\n}\n\n.chat-body{\n    display: flex;\n    flex-direction: column;\n    max-height: 88vh;\n    overflow: auto;\n    height: 88vh;\n}\n\n.chat-header{\n    height: 5vh;\n    background-color: #0C61F2;\n    color: white;\n    display: flex;\n    justify-content: center;\n    align-items: center;\n}\n\n.emoji-container{\n    position: absolute;\n    bottom: 7vh;\n}\n\n.emoji-icon{\n    position: relative;\n    bottom: -20px;\n}\n\n.no-user{\n    width: 100%;\n    height: 100vh;\n    background:linear-gradient(90deg, rgb(190, 230, 236), rgb(99, 195, 241));\n}\n\n.disable-button{\n    background-color: #dededc !important;\n}"
 
 /***/ }),
 
@@ -773,7 +773,9 @@ var MessageBoxComponent = /** @class */ (function () {
     };
     MessageBoxComponent.prototype.onEnterMessage = function () {
         console.log("Message entered!", this.message, this.chatId, this.receiverUser['userId']);
-        this.toggleEmojiLayout();
+        if (this.showEmoji) {
+            this.toggleEmojiLayout();
+        }
         this.messageList.push({
             message: this.message,
             senderId: this.currentUserId
@@ -1404,7 +1406,7 @@ var VideoCallService = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = ".container{\n    width: 100%;\n    height: 100%;\n    background: linear-gradient(180deg,  rgb(190, 230, 236), rgb(99, 195, 241));\n}\n\n.chat-list{\n    color: #0C61F2;\n    border-top: 1px solid grey;\n    /* background-color: white; */\n}\n\n.selected-user{\n    color: white;\n    background-color: #0C61F2;\n}\n\n.footer{\n    display: flex;\n    position: fixed;\n    bottom: 0px;\n    width: 20vw;\n    height: 6vh;\n}\n\n.header{\n    display: flex;\n    position: fixed;\n    top: 0px;\n    width: 20vw;\n    height: 6vh;\n}\n\n.user-list{\n    max-height: 88vh;\n    overflow: scroll;\n}\n\nbutton{\n    width: 100%;\n    background-color: #0C61F2;\n    color: white;\n}\n\n.mat-list, .mat-nav-list, .mat-selection-list {\n    position: relative;\n    padding-top: 8px;\n    top: 6vh;\n}"
+module.exports = ".container{\n    width: 100%;\n    height: 100%;\n    background: linear-gradient(180deg,  rgb(190, 230, 236), rgb(99, 195, 241));\n}\n\n.chat-list{\n    color: #0C61F2;\n    border-top: 1px solid grey;\n    /* background-color: white; */\n}\n\n.selected-user{\n    color: white;\n    background-color: #0C61F2;\n}\n\n.footer{\n    display: flex;\n    position: fixed;\n    bottom: 0px;\n    width: 20vw;\n    height: 6vh;\n}\n\n.header{\n    display: flex;\n    position: fixed;\n    top: 0px;\n    width: 20vw;\n    height: 6vh;\n}\n\n.user-list{\n    max-height: 88vh;\n    overflow: auto;\n    height: 88vh;\n}\n\nbutton{\n    width: 100%;\n    background-color: #0C61F2;\n    color: white;\n}\n\n.mat-list, .mat-nav-list, .mat-selection-list {\n    position: relative;\n    padding-top: 8px;\n    top: 6vh;\n}"
 
 /***/ }),
 
