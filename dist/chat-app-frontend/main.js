@@ -256,7 +256,7 @@ var AppModule = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = ".home{\n    width: 100vw;\n    height: 100vh;\n}\n\n.mat-drawer-container{\n    height: 100%;\n}\n\n.mat-drawer{\n    width: 20vw\n}\n\n.row{\n    margin: 0;\n}\n\n.chat-body{\n    height: 95vh;\n    /* width: 75vw; */\n}\n\n.menu{\n    height: 5vh;\n    align-items: center;\n    background-color: lightblue;\n    display: flex;\n    justify-content: center;\n}\n\n.accept-call{\n    background-color: #286d28;\n    color: white;\n}\n\n.decline-call{\n    background-color: darkred;\n    color: white;\n}"
+module.exports = ".home{\n    width: 100vw;\n    height: 100vh;\n}\n\n.mat-drawer-container{\n    height: 100%;\n}\n\n.mat-drawer{\n    width: 20vw\n}\n\n.row{\n    margin: 0;\n}\n\n.chat-body{\n    height: 95vh;\n    /* width: 75vw; */\n}\n\n.menu{\n    height: 5vh;\n    align-items: center;\n    background-color: lightblue;\n    display: flex;\n    justify-content: center;\n    position: absolute;\n    z-index: 10;\n}\n\n.accept-call{\n    background-color: #286d28;\n    color: white;\n}\n\n.decline-call{\n    background-color: darkred;\n    color: white;\n}"
 
 /***/ }),
 
@@ -1624,13 +1624,14 @@ var VideoChatBoxComponent = /** @class */ (function () {
         }
         // get media stream and use it to create the webrtc peer
         navigator.getUserMedia({ audio: true, video: true }, function (stream) {
-            _this.createSelfVideoSteam();
+            // this.createSelfVideoSteam();
             // create peer
             _this.peer = new SimplePeer({
                 initiator: _this.isInitiator,
                 stream: stream,
                 trickle: false
             });
+            console.log("Peer created!");
             // connect to initiator if you're the receiver
             if (!_this.isInitiator) {
                 console.log("Received request, now connecting");
