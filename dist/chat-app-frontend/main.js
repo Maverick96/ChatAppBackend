@@ -322,7 +322,7 @@ var HomeComponent = /** @class */ (function () {
     };
     HomeComponent.prototype.openVideoBox = function (data) {
         var dialogConfig = new _angular_material__WEBPACK_IMPORTED_MODULE_1__["MatDialogConfig"]();
-        // dialogConfig.disableClose = true;
+        dialogConfig.disableClose = true;
         dialogConfig.autoFocus = true;
         dialogConfig.data = data;
         dialogConfig.height = "80vh";
@@ -391,6 +391,7 @@ var HomeComponent = /** @class */ (function () {
         this.stopCallerTune();
         this.initData = {};
         this.isIncomingCall = false;
+        this.caller = '';
         this.videoCallService.setSelectedUser({});
         this.videoCallService.setInitiatorData({});
     };
@@ -1539,7 +1540,7 @@ var UserListComponent = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = ".main-video{\n    height: 70vh;\n    width: 75vw;\n}\n\n.mat-icon {\n    font-size: 40px;\n    margin: auto;\n    color: #DC143C;\n  }\n\n.side-video{\n    position: absolute;\n    /* display: inline; */\n    z-index: 3;\n    width: 180px;\n    /* top: -226px; */\n    top: 11vh;\n    right: 11vw;\n  }\n\n.mat-dialog-content{\n      height: 70vh;\n      max-height: unset !important;\n  }"
+module.exports = ".main-video{\n    height: 70vh;\n    width: 75vw;\n}\n\n.mat-icon {\n    font-size: 40px;\n    margin: auto;\n    color: #DC143C;\n  }\n\n.side-video{\n    position: absolute;\n    /* display: inline; */\n    z-index: 3;\n    width: 180px;\n    /* top: -226px; */\n    top: 11vh;\n    right: 11vw;\n  }\n\n.mat-dialog-content{\n    display: flex !important;\n    justify-content: center;\n    align-items: center;\n    max-height: none !important;\n  }"
 
 /***/ }),
 
@@ -1624,7 +1625,7 @@ var VideoChatBoxComponent = /** @class */ (function () {
         }
         // get media stream and use it to create the webrtc peer
         navigator.getUserMedia({ audio: true, video: true }, function (stream) {
-            // this.createSelfVideoSteam();
+            _this.createSelfVideoSteam();
             // create peer
             _this.peer = new SimplePeer({
                 initiator: _this.isInitiator,
