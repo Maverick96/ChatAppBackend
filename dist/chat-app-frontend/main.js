@@ -764,7 +764,9 @@ var MessageBoxComponent = /** @class */ (function () {
                 _this.messageList = res['result'];
                 _this.chatId = res['chatId'];
                 _this.userService.setUserChatId(_this.chatId);
-                _this.scrollToBottom();
+                if (_this.messageList.length) {
+                    _this.scrollToBottom();
+                }
             }, function (err) {
                 console.error(err);
                 _this.alertService.showAlert("Message could not be fetched!");
@@ -1624,6 +1626,7 @@ var VideoChatBoxComponent = /** @class */ (function () {
     };
     VideoChatBoxComponent.prototype.createPeerInstance = function () {
         var _this = this;
+        console.log("navigator ", navigator);
         if (this.peer) {
             console.log("Destroying");
             this.peer.destroy();

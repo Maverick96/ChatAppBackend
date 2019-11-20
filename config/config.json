@@ -1,14 +1,14 @@
 {
-    "development": {
+    "t-development": {
         "username": "sql12304353",
         "password": "zJc57JC2Cu",
         "database": "sql12304353",
-        "host": "sql12.freemysqlhosting.net",
+        "host": "db4free.net",
         "dialect": "mysql",
         "operatorsAliases": false,
         "logging": false
     },
-    "t-development": {
+    "development": {
         "username": "root",
         "password": "root@123",
         "database": "chat_app",
